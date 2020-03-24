@@ -28,8 +28,8 @@ include('menu.php');
                             </div>
                         </div>
                         <h3 class="heading mb-3"><a href="#">news head</a></h3>
-                        <p>shortly about story</p>
-                        <p><a href="/story" class="btn-custom"><span class="ion-ios-arrow-round-forward mr-3"></span>Read more</a></p>
+                        <p>Long about story</p>
+                        <p><a href="/item" class="btn-custom"><span class="ion-ios-arrow-round-forward mr-3"></span>Read more</a></p>
                     </div>
                 </div>
             </div>

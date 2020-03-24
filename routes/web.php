@@ -20,4 +20,8 @@ Route::get('/about', function () {
 Route::get('/news', function () {
     return view('news');
 });
+Route::get('/item', function () {
+    return view('item');
+});
+
 
