@@ -1,4 +1,4 @@
-<!doctype html>
+
 <nav class="navbar px-md-0 navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
         <div class="collapse navbar-collapse" id="ftco-nav">
