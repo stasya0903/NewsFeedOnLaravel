@@ -32,7 +32,7 @@ Route::group([
             'as' => 'categories.'
         ], function () {
             Route::get('/', 'CategoriesController@showAll')->name('all');
-            Route::get('/{category}', 'CategoriesController@showOne')->name('one');
+            Route::get('/{category}', 'NewsController@showCategory')->name('one');
         });
 
 

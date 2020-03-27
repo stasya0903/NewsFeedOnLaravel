@@ -29,7 +29,11 @@ class Category extends Model
         return static::$categories;
     }
 
-    public static function getNewsId($id) {
-        return static::$categories[$id];
+    public static function getCategoryName($name) {
+        foreach (static::$categories as $category) {
+            if ($category['name'] == $name) {
+                return $category['id'];
+            }
+        };
     }
 }
