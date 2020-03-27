@@ -1,5 +1,7 @@
 <?php
 
+use App\News\Category;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,17 +13,35 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-Route::get('/about', function () {
+Route::get('/', 'HomeController@index')->name('Home');
+/*Route::get('/about', function () {
     return view('about');
-});
-Route::get('/news', function () {
-    return view('news');
-});
-Route::get('/item', function () {
-    return view('item');
-});
+});*/
+
+Route::group([
+    'prefix' => 'news',
+    'namespace' => 'News',
+    'as' => 'news.'
+],
+
+    function () {
+        Route::get('/', 'NewsController@index')->name('News');
+        Route::get('/{id}/showOne', 'NewsController@showOne')->name('NewsOne');
+        Route::group([
+            'prefix' => 'categories',
+            'as' => 'categories.'
+        ], function () {
+            Route::get('/', 'CategoriesController@showAll')->name('all');
+            Route::get('/{category}', 'CategoriesController@showOne')->name('one');
+        });
+
+
+    });
+
+
+
+
+
+
 
 
