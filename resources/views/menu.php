@@ -3,9 +3,9 @@
     <div class="container">
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a href="/" class="nav-link">welcome page</a></li>
-                <li class="nav-item "><a href="/about" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="/news" class="nav-link">News</a></li>
+                <li class="nav-item"><a href="<?=route('Home')?>" class="nav-link">welcome page</a></li>
+                <li class="nav-item"><a href="<?=route('news.News')?>" class="nav-link">News</a></li>
+                <li class="nav-item"><a href="<?=route('news.categories.all')?>" class="nav-link">Categories</a></li>
             </ul>
         </div>
     </div>
