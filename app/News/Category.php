@@ -29,7 +29,7 @@ class Category extends Model
         return static::$categories;
     }
 
-    public static function getCategoryName($name) {
+    public static function getCategoryId($name) {
         foreach (static::$categories as $category) {
             if ($category['name'] == $name) {
                 return $category['id'];

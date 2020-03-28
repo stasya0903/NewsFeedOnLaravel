@@ -11,7 +11,4 @@ class CategoriesController extends Controller
     public function showAll(){
         return view('categories')->with('category', Category::getCategories() );
     }
-    public function showOne($category){
-        return $category;
-    }
 }

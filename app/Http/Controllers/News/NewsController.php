@@ -16,7 +16,8 @@ class NewsController extends Controller
         return view('newsOne')->with('news', News::getNewsId($id));
     }
     public function showCategory($category){
-        $categoryId = Category::getCategoryName($category);
-        return view('news')->with('news', News::getNewsByCategory($categoryId));
+        $categoryId = Category::getCategoryId($category);
+        return view('oneCategory', ['news'=> News::getNewsByCategory($categoryId),
+                                            'category'=> $category]);
     }
 }

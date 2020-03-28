@@ -64,18 +64,13 @@ class News extends Model
 
     public static function getNewsId($id)
     {
-        foreach (static::$news as $news) {
-            if ($news['id'] == $id) {
-                return $news;
-            }
-        }
+        return static::$news[$id];
     }
 
-    public static function getNewsByCategory($id)
+    public static function getNewsByCategory($category_id)
     {
-        return array_filter(static::$news, function ($element) use ($id) {
-            return $element['category_id'] === $id;
-
+        return array_filter(static::$news, function ($element) use ($category_id) {
+            return $element['category_id'] == $category_id;
         });
     }
 }

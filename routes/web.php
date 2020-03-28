@@ -14,9 +14,6 @@ use App\News\Category;
 */
 
 Route::get('/', 'HomeController@index')->name('Home');
-/*Route::get('/about', function () {
-    return view('about');
-});*/
 
 Route::group([
     'prefix' => 'news',
@@ -27,6 +24,7 @@ Route::group([
     function () {
         Route::get('/', 'NewsController@index')->name('News');
         Route::get('/{id}/showOne', 'NewsController@showOne')->name('NewsOne');
+
         Route::group([
             'prefix' => 'categories',
             'as' => 'categories.'
