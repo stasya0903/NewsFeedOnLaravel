@@ -9,19 +9,23 @@ class Category extends Model
     private static $categories = [
         1 => [
             'id' => 1,
-            'name'=> "sport"
+            'slot'=> "sport",
+            'title'=>"Спорт"
         ],
         2 => [
             'id' => 2,
-            'name'=> "politics"
+            'slot'=> "politics",
+            'title'=>"Политика"
         ],
         3 => [
             'id' => 3,
-            'name'=> "financial"
+            'slot'=> "financial",
+            'title'=>"Финансы"
         ],
         4 => [
             'id' => 4,
-            'name'=> "health"
+            'slot'=> "health",
+            'title'=>"Здоровье"
         ]
     ];
 
@@ -31,7 +35,7 @@ class Category extends Model
 
     public static function getCategoryByName($name) {
         foreach (static::$categories as $category) {
-            if ($category['name'] == $name) {
+            if ($category['slot'] == $name) {
                 return $category;
             }
         };

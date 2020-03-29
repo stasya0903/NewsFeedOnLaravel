@@ -10,7 +10,7 @@
 
 @section('content')
     @forelse($categories as $item)
-        <a href="{{ route('news.categories.show', $item['name']) }}">{{$item['name']}}</a><br>
+        <a href="{{ route('news.categories.show', $item['slot']) }}">{{$item['title']}}</a><br>
         <hr>
     @empty
         Нет новостей

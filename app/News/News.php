@@ -64,7 +64,11 @@ class News extends Model
 
     public static function getNewsId($id)
     {
-        return static::$news[$id];
+        if(!array_key_exists( $id, static::$news )){
+            abort(404, "Извините такой новости нет");
+        }
+       return $news = static::$news[$id] ?? null ;
+
     }
 
     public static function getNewsByCategoryId($category_id)
