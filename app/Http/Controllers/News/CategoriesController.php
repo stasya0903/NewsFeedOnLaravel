@@ -9,12 +9,13 @@ use App\Http\Controllers\Controller;
 
 class CategoriesController extends Controller
 {
-    public function showAll(){
-        return view('categories')->with('category', Category::getCategories() );
+    public function index(){
+        return view('news.categories')->with('categories', Category::getCategories() );
     }
 
-    public function showCategory($category){
-        return view('oneCategory', ['news'=> News::getNewsByCategory($category),
+    public function showOne($category){
+        $category = Category::getCategoryByName($category);
+        return view('news.oneCategory', ['news'=> News::getNewsByCategoryId($category['id']),
             'category'=> $category]);
     }
 }

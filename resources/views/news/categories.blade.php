@@ -9,8 +9,8 @@
 @endsection
 
 @section('content')
-    @forelse($news as $item)
-        {{$item['title']}}<a href="{{ route('news.show', $item['id']) }}">Подробнее...</a><br>
+    @forelse($categories as $item)
+        <a href="{{ route('news.categories.show', $item['name']) }}">{{$item['name']}}</a><br>
         <hr>
     @empty
         Нет новостей

@@ -10,10 +10,10 @@ use App\Http\Controllers\Controller;
 class NewsController extends Controller
 {
     public function index (){
-        return view('index')->with('news', News::getNews());
+        return view('news.index')->with('news', News::getNews());
     }
     public function showOne($id){
-        return view('newsOne')->with('news', News::getNewsId($id));
+        return view('news.one')->with('news', News::getNewsId($id));
     }
 
 }

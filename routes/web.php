@@ -34,8 +34,8 @@ Route::group([
             'prefix' => 'categories',
             'as' => 'categories.'
         ], function () {
-            Route::get('/', 'CategoriesController@showAll')->name('index');
-            Route::get('/{category}', 'NewsController@showCategory')->name('show');
+            Route::get('/', 'CategoriesController@index')->name('index');
+            Route::get('/{category}', 'CategoriesController@showOne')->name('show');
         });
 
 
