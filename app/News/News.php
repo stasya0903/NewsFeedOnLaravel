@@ -67,8 +67,9 @@ class News extends Model
         return static::$news[$id];
     }
 
-    public static function getNewsByCategory($category_id)
+    public static function getNewsByCategory($categoryName)
     {
+        $category_id = Category::getCategoryIdByName($categoryName);
         return array_filter(static::$news, function ($element) use ($category_id) {
             return $element['category_id'] == $category_id;
         });

@@ -1,6 +1,4 @@
-<?php
-include('menu.php');
-?>
+
 <h3><?= $category ?></h3>
 
 <?php foreach ($news as $item): ?>

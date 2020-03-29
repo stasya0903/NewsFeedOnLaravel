@@ -14,23 +14,28 @@ use App\News\Category;
 */
 
 Route::get('/', 'HomeController@index')->name('Home');
-
+/*
+|--------------------------------------------------------------------------
+|News
+|--------------------------------------------------------------------------
+|   Routes for the news functionality
+|
+*/
 Route::group([
     'prefix' => 'news',
     'namespace' => 'News',
     'as' => 'news.'
 ],
-
     function () {
-        Route::get('/', 'NewsController@index')->name('News');
-        Route::get('showOne/{id}/', 'NewsController@showOne')->name('NewsOne');
+        Route::get('/', 'NewsController@index')->name('index');
+        Route::get('showOne/{id}/', 'NewsController@showOne')->name('show');
 
         Route::group([
             'prefix' => 'categories',
             'as' => 'categories.'
         ], function () {
-            Route::get('/', 'CategoriesController@showAll')->name('all');
-            Route::get('/{category}', 'NewsController@showCategory')->name('one');
+            Route::get('/', 'CategoriesController@showAll')->name('index');
+            Route::get('/{category}', 'NewsController@showCategory')->name('show');
         });
 
 
