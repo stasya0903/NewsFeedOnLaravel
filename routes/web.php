@@ -41,6 +41,16 @@ Route::group([
 
     });
 
+Route::group([
+    'prefix' => 'admin',
+    'namespace' => 'Admin',
+    'as' => 'admin.'
+],
+    function () {
+        Route::get('/', 'IndexController@index')->name('index');
+        Route::get('/test1', 'IndexController@test1')->name('test1');
+    });
+
 
 
 
