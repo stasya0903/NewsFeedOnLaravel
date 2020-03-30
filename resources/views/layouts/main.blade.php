@@ -9,9 +9,12 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
-<body>
+<body class="d-flex flex-column h-100" data-gr-c-s-loaded="true">
 @yield('menu')
-@yield('content')
+<main role="main" class="flex-shrink-0 page-content">
+   @yield('content')
+
+</main>
 @yield('footer')
 <script src="{{ asset('js/app.js') }}"></script>
 </body>
