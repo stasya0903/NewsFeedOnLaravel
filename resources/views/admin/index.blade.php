@@ -11,6 +11,3 @@
 
 @endsection
 
-@section("footer")
-    @include("footer")
-@endsection
