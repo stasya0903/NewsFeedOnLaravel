@@ -14,26 +14,41 @@ use App\News\Category;
 */
 
 Route::get('/', 'HomeController@index')->name('Home');
-
+/*
+|--------------------------------------------------------------------------
+|News
+|--------------------------------------------------------------------------
+|   Routes for the news functionality
+|
+*/
 Route::group([
     'prefix' => 'news',
     'namespace' => 'News',
     'as' => 'news.'
 ],
-
     function () {
-        Route::get('/', 'NewsController@index')->name('News');
-        Route::get('showOne/{id}/', 'NewsController@showOne')->name('NewsOne');
+        Route::get('/', 'NewsController@index')->name('index');
+        Route::get('showOne/{id}/', 'NewsController@showOne')->name('show');
 
         Route::group([
             'prefix' => 'categories',
             'as' => 'categories.'
         ], function () {
-            Route::get('/', 'CategoriesController@showAll')->name('all');
-            Route::get('/{category}', 'NewsController@showCategory')->name('one');
+            Route::get('/', 'CategoriesController@index')->name('index');
+            Route::get('/{category}', 'CategoriesController@showOne')->name('show');
         });
 
 
+    });
+
+Route::group([
+    'prefix' => 'admin',
+    'namespace' => 'Admin',
+    'as' => 'admin.'
+],
+    function () {
+        Route::get('/', 'IndexController@index')->name('index');
+        Route::get('/test1', 'IndexController@test1')->name('test1');
     });
 
 
@@ -43,3 +58,7 @@ Route::group([
 
 
 
+
+Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');
