@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\News\Category;
 use App\News\News;
+use App\News\NewsExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
