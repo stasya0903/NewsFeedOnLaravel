@@ -39,7 +39,7 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Категория') }}</label>
 
                                 <div class="col-md-6">
-                                    <select name="category" id="category"
+                                    <select name="category_id" id="category"
                                             class="form-control @error('category') is-invalid @enderror">
                                         @foreach($categories as $item)
                                             <option value="{{$item['id']}}">{{$item['title']}}</option>

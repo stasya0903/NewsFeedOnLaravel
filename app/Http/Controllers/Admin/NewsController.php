@@ -12,33 +12,41 @@ use NunoMaduro\Collision\Writer;
 
 class NewsController extends Controller
 {
-    public function index (){
+    public function index()
+    {
         return view('admin.news.index')->with('news', News::getNews());
     }
 
-    public function create(Request $request) {
-        if($request->isMethod("post")){
+    public function create(Request $request)
+    {
+        if ($request->isMethod("post")) {
             $request->flash();
-            News::create($request->except('_token'));
-            return redirect()->route('admin.news.index');
+            $result = News::create($request->except('_token'));
+            if ($result) {
+                return redirect()->route('admin.news.index');
+            }
         }
-        return view('admin.news.create',[
-            'categories'=>Category::getCategories()
+        return view('admin.news.create', [
+            'categories' => Category::getCategories()
         ]);
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $newsItem = News::getNewsId($id);
-        if(!$newsItem){
+        if (!$newsItem) {
             abort(404, "Извините такой новости нет");
         }
         return view('admin.news.one')->with('news', $newsItem);
     }
 
-    public function download(Request $request){
-        if($request->isMethod("post")){
+    public function download(Request $request)
+    {
+        if ($request->isMethod("post")) {
+
             $downloadRequest = $request->input('format');
-            if($downloadRequest){
+
+            if ($downloadRequest) {
                 return $this->$downloadRequest();
             }
 
@@ -54,17 +62,11 @@ class NewsController extends Controller
 
     }
 
-    /*public function EXCEL(Excel $excel )
-    {
-        return Excel::download((new NewsExport)->array(), 'news.xlsx');
-    }*/
-
     public function EXCEL()
     {
         $export = new NewsExport([
             News::getNews()
         ]);
-
         return Excel::download($export, 'news.xlsx');
     }
 
