@@ -56,6 +56,7 @@ Route::group([
             Route::get('/', 'NewsController@index')->name('index');
             Route::get('showOne/{id}/', 'NewsController@show')->name('show');
             Route::match(['get', 'post'], '/download', 'NewsController@download')->name('download');
+            Route::match(['get', 'post'], '/delete/{id}', 'NewsController@delete')->name('delete');
             //Route::get('/{category}', 'CategoriesController@showOne')->name('show');
         });
     });

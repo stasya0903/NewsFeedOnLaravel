@@ -35,11 +35,19 @@ class News extends Model
 
     public static function create($newNewsItem)
     {
-        $lastElementKey = array_key_last(News::getNews());
+        $news = News::getNews();
+        $lastElementKey = array_key_last($news) ?? 0;
         $newNewsItem['id'] = $lastElementKey + 1;
         array_push($news, $newNewsItem);
         return Storage::put('news.json', json_encode($news, JSON_PRETTY_PRINT));
     }
 
+    public static function deleteNewsItem($itemId)
+    {
+        $news = News::getNews();
+        $elementKey = array_search($itemId, array_column($news, 'id'));
+        array_splice($news, $elementKey, 1);
+        return Storage::put('news.json', json_encode($news, JSON_PRETTY_PRINT));
 
+    }
 }

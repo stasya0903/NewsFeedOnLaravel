@@ -15,7 +15,10 @@ class NewsController extends Controller
 {
     public function index()
     {
-        return view('admin.news.index')->with('news', News::getNews());
+        return view('admin.news.index', [
+            'categories' => Category::getCategories(),
+            'news'=> News::getNews()
+        ]);
     }
 
     public function create(Request $request)
@@ -30,6 +33,22 @@ class NewsController extends Controller
         return view('admin.news.create', [
             'categories' => Category::getCategories()
         ]);
+    }
+
+    public function delete($itemId)
+    {
+       if (News::deleteNewsItem($itemId)){
+           return view('admin.news.index', [
+               'categories' => Category::getCategories(),
+               'news'=> News::getNews()
+           ]);
+       } else {
+           return view('admin.news.index', [
+               'categories' => Category::getCategories(),
+               'news'=> News::getNews(),
+           ]);
+       }
+
     }
 
     public function show($id)
