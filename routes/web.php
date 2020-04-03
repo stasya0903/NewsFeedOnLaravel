@@ -28,7 +28,7 @@ Route::group([
 ],
     function () {
         Route::get('/', 'NewsController@index')->name('index');
-        Route::get('showOne/{id}/', 'NewsController@showOne')->name('show');
+        Route::get('showOne/{id}/', 'NewsController@show')->name('show');
 
         Route::group([
             'prefix' => 'categories',
@@ -48,15 +48,17 @@ Route::group([
 ],
     function () {
         Route::get('/', 'IndexController@index')->name('index');
-        Route::get('/test1', 'IndexController@test1')->name('test1');
+        Route::match(['get', 'post'], '/create', 'NewsController@create')->name('create');
+        Route::group([
+            'prefix' => 'news',
+            'as' => 'news.'
+        ], function () {
+            Route::get('/', 'NewsController@index')->name('index');
+            Route::get('showOne/{id}/', 'NewsController@show')->name('show');
+            Route::match(['get', 'post'], '/download', 'NewsController@download')->name('download');
+            //Route::get('/{category}', 'CategoriesController@showOne')->name('show');
+        });
     });
-
-
-
-
-
-
-
 
 
 Auth::routes();

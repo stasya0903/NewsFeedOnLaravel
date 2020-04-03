@@ -2,79 +2,46 @@
 
 namespace App\News;
 
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Storage;
 
 class News extends Model
 {
-    private static $news = [
-        1 => [
-            'id' => 1,
-            'title' => 'Новость 1',
-            'text' => 'А у нас новость 1 и она очень хорошая!',
-            'category_id' => 1
-        ],
-        2 => [
-            'id' => 2,
-            'title' => 'Новость 2',
-            'text' => 'ljljljlk',
-            'category_id' => 2
-        ],
-        3 => [
-            'id' => 3,
-            'title' => 'Новость 3',
-            'text' => 'А тут плохие новости(((',
-            'category_id' => 3
-        ],
-        4 => [
-            'id' => 4,
-            'title' => 'Новость 4',
-            'text' => 'А тут плохие новости(((',
-            'category_id' => 4
-        ],
-        5 => [
-            'id' => 5,
-            'title' => 'Новость 5',
-            'text' => 'А у нас новость 1 и она очень хорошая!',
-            'category_id' => 4
-        ],
-        6 => [
-            'id' => 6,
-            'title' => 'Новость 6',
-            'text' => 'ljljljlk',
-            'category_id' => 3
-        ],
-        7 => [
-            'id' => 7,
-            'title' => 'Новость 7',
-            'text' => 'А тут плохие новости(((',
-            'category_id' => 2
-        ],
-        8 => [
-            'id' => 8,
-            'title' => 'Новость 8',
-            'text' => 'А тут плохие новости(((',
-            'category_id' => 1
-        ],
-    ];
 
     public static function getNews()
     {
-        return static::$news;
+       return $news = json_decode(Storage::get('news.json'), 1);
+
     }
 
     public static function getNewsId($id)
     {
-        if(!array_key_exists( $id, static::$news )){
-            abort(404, "Извините такой новости нет");
+        $news =  News::getNews();
+        foreach ($news as $item){
+           if($item['id'] == $id){
+               return $item;
+           }
         }
-       return $news = static::$news[$id] ?? null ;
-
     }
 
     public static function getNewsByCategoryId($category_id)
     {
-        return array_filter(static::$news, function ($element) use ($category_id) {
+        $news =  News::getNews() ?? [];
+        return array_filter($news, function ($element) use ($category_id) {
             return $element['category_id'] == $category_id;
         });
     }
+
+    public static function create($newNewsItem)
+    {
+        $news =  News::getNews() ?? [];
+        $lastElementKey = array_key_last($news);
+        $newNewsItem['id'] = $lastElementKey + 1;
+        array_push($news, $newNewsItem);
+        Storage::put('news.json', json_encode($news, JSON_PRETTY_PRINT));
+    }
+
+
 }

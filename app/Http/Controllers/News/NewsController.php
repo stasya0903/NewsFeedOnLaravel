@@ -12,8 +12,12 @@ class NewsController extends Controller
     public function index (){
         return view('news.index')->with('news', News::getNews());
     }
-    public function showOne($id){
-        return view('news.one')->with('news', News::getNewsId($id));
+    public function show($id){
+        $newsItem = News::getNewsId($id);
+        if(!$newsItem){
+            abort(404, "Извините такой новости нет");
+        }
+        return view('news.one')->with('news', $newsItem);
     }
 
 }
