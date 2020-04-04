@@ -126,6 +126,10 @@ body {
   border-radius: 0 !important;
 }
 
+.active {
+  border-bottom: 1px solid #f66d9b !important;
+}
+
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors

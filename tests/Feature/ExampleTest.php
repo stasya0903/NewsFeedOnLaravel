@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\News\Category;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -18,4 +19,21 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function testNewsTest()
+    {
+        $response = $this->get('/news');
+
+        $response->assertStatus(200);
+    }
+
+    public function testAdminTest()
+    {
+        $response = $this->get('/admin');
+
+        $response->assertStatus(200);
+    }
+
+
 }
+
