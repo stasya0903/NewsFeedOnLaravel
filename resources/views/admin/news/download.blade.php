@@ -15,7 +15,7 @@
                     <div class="card-header pink-bg text-white">{{ __('Загрузить новости') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.news.download') }}">
+                        <form method="POST" action="{{ route('admin.news.export') }}">
                             @csrf
                             <div class="form-group row">
                                 <label for="category"

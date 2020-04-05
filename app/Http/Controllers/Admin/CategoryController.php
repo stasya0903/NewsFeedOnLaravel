@@ -24,7 +24,7 @@ class CategoryController extends Controller
             $request->flash();
             $result = Category::create($request);
             if ($result) {
-                return redirect()->route('admin.news.categories.index');
+                return redirect()->route('admin.news.categories.index')->with('success',"Категория успешно добавлена");
             }
         }
         return view('admin.news.categories.create', [
@@ -34,17 +34,8 @@ class CategoryController extends Controller
     public function delete($itemId)
     {
         if (News::deleteNewsItem($itemId)){
-            return view('admin.news.index', [
-                'categories' => Category::getCategories(),
-                'news'=> DB::table('news')->get()
-            ]);
-        } else {
-            return view('admin.news.index', [
-                'categories' => Category::getCategories(),
-                'news'=> DB::table('news')->get()
-            ]);
+            return redirect()->route('admin.news.categories.index')->with('success',"Категория успешно удалена");
         }
-
     }
 
     public function show($id)
@@ -54,6 +45,17 @@ class CategoryController extends Controller
             abort(404, "Извините такой новости нет");
         }
         return view('admin.news.one')->with('news', $newsItem);
+    }
+
+    public function showOne($category){
+        $category = Category::getCategoryByName($category);
+        if(!$category){
+            abort(404, "Извините такой Категории нет");
+        }
+        return view('admin.news.categories.show', [
+            'news'=> News::getNewsByCategoryId($category->id),
+            'category'=> $category
+        ]);
     }
 
 }

@@ -55,7 +55,7 @@ Route::group([
             Route::get('/', 'NewsController@index')->name('index');
             Route::get('show/{id}/', 'NewsController@show')->name('show');
             Route::match(['get', 'post'], '/create', 'NewsController@create')->name('create');
-            Route::match(['get', 'post'], '/download', 'NewsController@download')->name('download');
+            Route::match(['get', 'post'], '/export', 'NewsController@export')->name('export');
             Route::match(['get', 'post'], '/delete/{id}', 'NewsController@delete')->name('delete');
             Route::group([
                 'prefix' => 'categories',

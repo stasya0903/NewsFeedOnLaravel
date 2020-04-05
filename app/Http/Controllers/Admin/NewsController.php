@@ -29,28 +29,19 @@ class NewsController extends Controller
             $request->flash();
             $result = News::create($request);
             if ($result) {
-                return redirect()->route('admin.news.index');
+                return redirect()->route('admin.news.index')->with("success", 'Новость успешно добавлена');
             }
         }
         return view('admin.news.create', [
-            'categories' => Category::getCategories()
+            'categories' => Category::getCategories(),
         ]);
     }
 
     public function delete($itemId)
     {
-       if (News::deleteNewsItem($itemId)){
-           return view('admin.news.index', [
-               'categories' => Category::getCategories(),
-               'news'=> DB::table('news')->get()
-           ]);
-       } else {
-           return view('admin.news.index', [
-               'categories' => Category::getCategories(),
-               'news'=> DB::table('news')->get()
-           ]);
+       if (News::deleteNewsItem($itemId)) {
+           return redirect()->route('admin.news.index')->with("success", 'Новость успешно добавлена');
        }
-
     }
 
     public function show($id)
@@ -62,7 +53,7 @@ class NewsController extends Controller
         return view('admin.news.one')->with('news', $newsItem);
     }
 
-    public function download(Request $request)
+    public function export(Request $request)
     {
         if ($request->isMethod("post")) {
 
@@ -78,7 +69,7 @@ class NewsController extends Controller
 
     public function JSON()
     {
-        return response()->json(News::getNews())
+        return response()->json(DB::table('news')->get())
             ->header('Content-Disposition', 'attachment; filename = "json.txt"')
             ->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
@@ -86,10 +77,7 @@ class NewsController extends Controller
 
     public function EXCEL()
     {
-        $export = new NewsExport([
-            News::getNews()
-        ]);
-        return Excel::download($export, 'news.xlsx');
+        return Excel::download(new NewsExport, 'news.xlsx');
     }
 
 

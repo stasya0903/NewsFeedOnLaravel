@@ -19,7 +19,7 @@ class CategoriesController extends Controller
             abort(404, "Извините такой Категории нет");
         }
         return view('news.oneCategory', [
-            'news'=> News::getNewsByCategoryId($category['id']),
+            'news'=> News::getNewsByCategoryId($category->id),
             'category'=> $category
         ]);
     }

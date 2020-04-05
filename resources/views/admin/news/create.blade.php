@@ -15,7 +15,7 @@
                     <div class="card-header pink-bg text-white">{{ __('Добавить новость') }}</div>
 
                     <div class="card-body">
-                        <form enctype="multipart/form-data" method="POST" action="{{ route('admin.create') }}">
+                        <form enctype="multipart/form-data" method="POST" action="{{ route('admin.news.create') }}">
                             @csrf
                             <div class="form-group row">
                                 <label for="title"
@@ -42,7 +42,7 @@
                                     <select name="category_id" id="category"
                                             class="form-control @error('category') is-invalid @enderror">
                                         @foreach($categories as $item)
-                                            <option value="{{$item['id']}}">{{$item['title']}}</option>
+                                            <option value="{{$item->id}}">{{$item->title}}</option>
                                         @endforeach
                                     </select>
 

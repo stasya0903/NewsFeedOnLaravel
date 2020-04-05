@@ -18,7 +18,14 @@
 <body class="d-flex flex-column h-100" data-gr-c-s-loaded="true">
 @include('header')
 @yield('menu')
-
+@if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
 <main role="main" class="flex-shrink-0 page-content py-4">
    @yield('content')
 

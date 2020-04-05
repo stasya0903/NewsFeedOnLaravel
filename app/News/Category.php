@@ -13,7 +13,7 @@ class Category extends Model
 
     public static function getCategoryByName($name) {
         foreach (Category::getCategories() as $category) {
-            if ($category['slot'] == $name) {
+            if ($category->slot == $name) {
                 return $category;
             }
         };
