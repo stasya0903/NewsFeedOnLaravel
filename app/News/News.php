@@ -4,6 +4,7 @@ namespace App\News;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -33,21 +34,29 @@ class News extends Model
         });
     }
 
-    public static function create($newNewsItem)
+    public static function create($request)
     {
-        $news = News::getNews();
-        $lastElementKey = array_key_last($news) ?? 0;
-        $newNewsItem['id'] = $lastElementKey + 1;
-        array_push($news, $newNewsItem);
-        return Storage::put('news.json', json_encode($news, JSON_PRETTY_PRINT));
+        $newsItem [] = [
+            'title' =>$request->title,
+            'text' => $request->text,
+            'image'=> static::saveImg($request),
+            'isPrivate' => isset($request->isPrivate)
+        ];
+       return DB::table('news')->insert($newsItem);
     }
 
     public static function deleteNewsItem($itemId)
     {
-        $news = News::getNews();
-        $elementKey = array_search($itemId, array_column($news, 'id'));
-        array_splice($news, $elementKey, 1);
-        return Storage::put('news.json', json_encode($news, JSON_PRETTY_PRINT));
+        return DB::table('news')->where('id', $itemId)->delete();
 
+    }
+
+    public static function saveImg($request){
+        $url = null;
+        if ($request->file('image')) {
+            $path = Storage::putFile('public/images', $request->file('image'));
+            $url =  Storage::url($path);
+        }
+        return $url;
     }
 }

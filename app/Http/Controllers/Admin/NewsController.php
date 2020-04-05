@@ -8,6 +8,7 @@ use App\News\NewsExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use NunoMaduro\Collision\Writer;
 
@@ -15,9 +16,10 @@ class NewsController extends Controller
 {
     public function index()
     {
+        $news = DB::table('news')->get();
         return view('admin.news.index', [
             'categories' => Category::getCategories(),
-            'news'=> News::getNews()
+            'news'=> $news
         ]);
     }
 
@@ -25,7 +27,7 @@ class NewsController extends Controller
     {
         if ($request->isMethod("post")) {
             $request->flash();
-            $result = News::create($request->except('_token'));
+            $result = News::create($request);
             if ($result) {
                 return redirect()->route('admin.news.index');
             }
@@ -40,12 +42,12 @@ class NewsController extends Controller
        if (News::deleteNewsItem($itemId)){
            return view('admin.news.index', [
                'categories' => Category::getCategories(),
-               'news'=> News::getNews()
+               'news'=> DB::table('news')->get()
            ]);
        } else {
            return view('admin.news.index', [
                'categories' => Category::getCategories(),
-               'news'=> News::getNews(),
+               'news'=> DB::table('news')->get()
            ]);
        }
 
@@ -53,7 +55,7 @@ class NewsController extends Controller
 
     public function show($id)
     {
-        $newsItem = News::getNewsId($id);
+        $newsItem = DB::table('news')->find($id);
         if (!$newsItem) {
             abort(404, "Извините такой новости нет");
         }
