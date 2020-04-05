@@ -5,7 +5,7 @@
 @endsection
 
 @section('menu')
-    @include('menu')
+    @include('admin.menu')
 @endsection
 
 @section('content')
@@ -23,15 +23,19 @@
                 <div class="card m-2 text-center">
                     <div class="card-body">
                         <a class='simpleHeader grey hoverYellow'
-                           href="{{ route('news.categories.show', $item->slot) }}">{{$item->title}}</a>
+                           href="{{ route('admin.news.categories.show', $item->slot) }}">{{$item->title}}</a>
                     </div>
                 </div>
+
+
+
             @empty
                 Нет категорий
             @endforelse
             <div class="card m-2 text-center">
                 <div class="card-body">
-
+                    <a class='simpleHeader grey hoverYellow' href="{{ route('admin.news.categories.create') }}">
+                        Добавить</a>
                 </div>
             </div>
         </div>

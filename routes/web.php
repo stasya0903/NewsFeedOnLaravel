@@ -48,16 +48,24 @@ Route::group([
 ],
     function () {
         Route::get('/', 'IndexController@index')->name('index');
-        Route::match(['get', 'post'], '/create', 'NewsController@create')->name('create');
         Route::group([
             'prefix' => 'news',
             'as' => 'news.'
         ], function () {
             Route::get('/', 'NewsController@index')->name('index');
-            Route::get('showOne/{id}/', 'NewsController@show')->name('show');
+            Route::get('show/{id}/', 'NewsController@show')->name('show');
+            Route::match(['get', 'post'], '/create', 'NewsController@create')->name('create');
             Route::match(['get', 'post'], '/download', 'NewsController@download')->name('download');
             Route::match(['get', 'post'], '/delete/{id}', 'NewsController@delete')->name('delete');
-            //Route::get('/{category}', 'CategoriesController@showOne')->name('show');
+            Route::group([
+                'prefix' => 'categories',
+                'as' => 'categories.'
+            ], function () {
+                Route::get('/', 'CategoryController@index')->name('index');
+                Route::get('/show/{category}', 'CategoryController@showOne')->name('show');
+                Route::match(['get', 'post'], '/create', 'CategoryController@create')->name('create');
+                Route::match(['get', 'post'], '/delete/{id}', 'CategoryController@delete')->name('delete');
+            });
         });
     });
 

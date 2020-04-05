@@ -13,10 +13,8 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $news = DB::table('news')->get();
-        return view('admin.news.index', [
+        return view('admin.news.categories.index', [
             'categories' => Category::getCategories(),
-            'news'=> $news
         ]);
     }
 
@@ -24,13 +22,12 @@ class CategoryController extends Controller
     {
         if ($request->isMethod("post")) {
             $request->flash();
-            $result = News::create($request);
+            $result = Category::create($request);
             if ($result) {
-                return redirect()->route('admin.news.index');
+                return redirect()->route('admin.news.categories.index');
             }
         }
-        return view('admin.news.create', [
-            'categories' => Category::getCategories()
+        return view('admin.news.categories.create', [
         ]);
     }
 
