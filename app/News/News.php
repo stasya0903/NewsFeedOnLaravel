@@ -21,4 +21,5 @@ class News extends Model
         }
         return $url;
     }
+
 }

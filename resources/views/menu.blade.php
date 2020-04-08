@@ -20,6 +20,7 @@
                                 новость</a>
                             <a href="{{route('admin.news.edit')}}" class="dropdown-item hoverYellow ">Редактировать
                                 новости</a>
+                            <a href="{{route('admin.news.categories.edit')}}" class="dropdown-item hoverYellow ">Редактировать категории</a>
                             <a href="{{route('admin.news.export')}}" class="dropdown-item hoverYellow ">Выгрузить
                                 новости</a>
                         </div>

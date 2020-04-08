@@ -12,7 +12,6 @@
                         <a href="{{route('admin.news.index')}}" class="dropdown-item hoverYellow ">Главная</a>
                         <a href="{{route('admin.news.create')}}" class="dropdown-item hoverYellow ">Добавить новость</a>
                         <a href="{{route('admin.news.edit')}}" class="dropdown-item hoverYellow ">Редактировать новости</a>
-                        <a href="{{route('admin.news.categories.edit')}}" class="dropdown-item hoverYellow ">Редактировать категории</a>
                         <a href="{{route('admin.news.export')}}" class="dropdown-item hoverYellow ">Выгрузить новости</a>
                     </div></li>
                     <li class="nav-item"><a href="{{ route('news.index') }}" class="nav-link">Новости</a></li>

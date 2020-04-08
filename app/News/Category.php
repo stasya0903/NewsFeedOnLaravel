@@ -12,12 +12,4 @@ class Category extends Model
         return 'slug';
     }
 
-    public static function create(\Illuminate\Http\Request $request)
-    {
-        $newsItem [] = [
-            'title' => $request->title,
-            'slot' => $request->slot,
-        ];
-        return DB::table('categories')->insert($newsItem);
-    }
 }

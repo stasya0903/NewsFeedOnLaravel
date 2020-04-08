@@ -67,13 +67,13 @@ Route::group([
             ], function () {
                 Route::get('/index', 'CategoryController@index')->name('index');
                 Route::get('/show/{category}', 'CategoryController@show')->name('show');
-                Route::get('/create', 'NewsController@create')->name('create');
-                Route::post('/create', 'NewsController@store')->name('store');
-                Route::get('/edit', 'NewsController@edit')->name('edit');
-                Route::get('/show/{news}', 'NewsController@show')->name('show');
-                Route::delete( '/delete/{news}', 'NewsController@delete')->name('delete');
-                Route::get( '/update/{news}', 'NewsController@editOne')->name('editOne');
-                Route::post( '/update/{news}', 'NewsController@update')->name('update');;
+                Route::get('/create', 'CategoryController@create')->name('create');
+                Route::post('/create', 'CategoryController@store')->name('store');
+                Route::get('/edit', 'CategoryController@edit')->name('edit');
+                Route::get('/show/{category}', 'CategoryController@show')->name('show');
+                Route::delete( '/delete/{category}', 'CategoryController@delete')->name('delete');
+                Route::get( '/update/{category}', 'CategoryController@editOne')->name('editOne');
+                Route::post( '/update/{category}', 'CategoryController@update')->name('update');
             });
         });
     });

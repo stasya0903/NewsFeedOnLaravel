@@ -28,9 +28,9 @@
                 <tbody>
                 @foreach($news as $item)
 
-                        <tr>
-                            <form method="POST" action="{{route('admin.news.update',$item->id)}}">
-                                @csrf
+                    <tr>
+                        <form method="POST" action="{{route('admin.news.update',$item->id)}}">
+                            @csrf
                             <td>
                                 <textarea cols="40"
                                           rows="1"
@@ -56,22 +56,22 @@
 
                             <td><input type="submit"></td>
 
-                    <td><a href="{{route('admin.news.editOne', $item->id) }}"> update </a></td>
+                            <td><a href="{{route('admin.news.editOne', $item->id) }}"> update </a></td>
 
-                        <td>
-                            </form>
-                            <form method="POST" action="{{route('admin.news.delete',$item->id)}}">
+                            <td>
+                        </form>
+                        <form method="POST" action="{{route('admin.news.delete',$item->id)}}">
                             @csrf
                             @method('DELETE')
                             <input type="submit">
-                            </form>
+                        </form>
                         </td>
-
 
 
                     </tr>
 
                 @endforeach
+
                 </tbody>
             </table>
         </div>
