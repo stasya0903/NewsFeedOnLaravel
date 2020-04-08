@@ -6,7 +6,7 @@
  * @package  Laravel
  * @author   Taylor Otwell <taylor@laravel.com>
  */
-
+setlocale( LC_TIME, 'ru_RU', 'russian' );
 define('LARAVEL_START', microtime(true));
 
 /*
@@ -49,6 +49,7 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 | and wonderful application we have prepared for them.
 |
 */
+setlocale( LC_TIME, 'ru_RU', 'russian' );
 
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 

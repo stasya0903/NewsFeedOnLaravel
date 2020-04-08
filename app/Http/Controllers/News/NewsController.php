@@ -10,14 +10,10 @@ use App\Http\Controllers\Controller;
 class NewsController extends Controller
 {
     public function index (){
-        return view('news.index')->with('news', News::getNews());
+        return view('news.index')->with('news', News::all());
     }
-    public function show($id){
-        $newsItem = News::getNewsId($id);
-        if(!$newsItem){
-            abort(404, "Извините такой новости нет");
-        }
-        return view('news.one')->with('news', $newsItem);
+    public function show(News $news){
+        return view('news.one')->with('news', $news);
     }
 
 }

@@ -2,7 +2,7 @@
 
 
 @section('menu')
-    @include('admin.menu')
+    @include('menu')
 @endsection
 
 @section("content")
@@ -15,7 +15,7 @@
                     <div class="card-header pink-bg text-white">{{ __('Добавить категорию') }}</div>
 
                     <div class="card-body">
-                        <form enctype="multipart/form-data" method="POST" action="{{ route('admin.news.categories.create') }}">
+                        <form enctype="multipart/form-data" method="POST" action="{{ route('admin.news.categories.store') }}">
                             @csrf
                             <div class="form-group row">
                                 <label for="title"

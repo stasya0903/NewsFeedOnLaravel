@@ -16,42 +16,73 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $news = DB::table('news')->get();
         return view('admin.news.index', [
             'categories' => Category::getCategories(),
-            'news'=> $news
+            'news' => News::all()
         ]);
     }
 
-    public function create(Request $request)
+    public function show(News $news)
     {
-        if ($request->isMethod("post")) {
-            $request->flash();
-            $result = News::create($request);
-            if ($result) {
-                return redirect()->route('admin.news.index')->with("success", 'Новость успешно добавлена');
-            }
-        }
+        return view('admin.news.one')->with('news', $news);
+    }
+
+    public function create()
+    {
         return view('admin.news.create', [
-            'categories' => Category::getCategories(),
+            'categories' => Category::all(),
         ]);
     }
 
-    public function delete($itemId)
+    public function store(Request $request)
     {
-       if (News::deleteNewsItem($itemId)) {
-           return redirect()->route('admin.news.index')->with("success", 'Новость успешно добавлена');
-       }
+        $data = News::create(
+            [
+                'title' => request()['title'],
+                'text' => request()['text'],
+                'image' => News::saveImg($request),
+                'isPrivate' => isset($request->isPrivate)
+            ]);
+        return redirect(route('admin.news.show', $data->id));
     }
 
-    public function show($id)
+    public function edit()
     {
-        $newsItem = DB::table('news')->find($id);
-        if (!$newsItem) {
-            abort(404, "Извините такой новости нет");
-        }
-        return view('admin.news.one')->with('news', $newsItem);
+        return view('admin.news.edit', [
+            'news' => News::all(),
+            'categories' => Category::all(),
+        ]);
+
     }
+    public function editOne(News $news)
+    {
+        return view('admin.news.update', [
+            'news' => $news,
+            'categories' => Category::all(),
+        ]);
+
+    }
+
+    public function update(News $news, Request $request)
+    {
+        $dataToUpdate = $request->except('_token');
+        $news->update($dataToUpdate);
+        return redirect(route('admin.news.update', $news->id))->with("success", 'Новость успешно обновлена');
+
+    }
+
+    public function delete(News $news)
+    {
+        try {
+            $news->delete();
+            return redirect()->route('admin.news.edit')->with("success", 'Новость успешно удалена');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.news.edit')->with("success", 'Ошибка сервера');
+
+        }
+
+    }
+
 
     public function export(Request $request)
     {

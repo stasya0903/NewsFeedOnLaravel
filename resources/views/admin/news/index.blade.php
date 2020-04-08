@@ -5,7 +5,7 @@
 @endsection
 
 @section('menu')
-    @include('admin.menu')
+    @include('menu')
 @endsection
 
 @section('content')
@@ -20,7 +20,7 @@
                         <div class="col p-4 d-flex flex-column position-static">
                             <strong class="d-inline-block mb-2 ">Категория</strong>
                             <h3 class="mb-0 yellow">{{$item->title}}</h3>
-                            <div class="mb-1 text-muted">Nov 12</div>
+                            <div class="mb-1 text-muted">{{$item->created_at}}</div>
 
                             <div class="d-flex justify-content-sm-between align-items-center mt-2">
 

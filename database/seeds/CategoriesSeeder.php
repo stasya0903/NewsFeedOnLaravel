@@ -6,19 +6,19 @@ class CategoriesSeeder extends Seeder
 {
     private  $categories = [
         1 => [
-            'slot'=> "sport",
+            'slug'=> "sport",
             'title'=>"Спорт"
         ],
         2 => [
-            'slot'=> "politics",
+            'slug'=> "politics",
             'title'=>"Политика"
         ],
         3 => [
-            'slot'=> "financial",
+            'slug'=> "financial",
             'title'=>"Финансы"
         ],
         4 => [
-            'slot'=> "health",
+            'slug'=> "health",
             'title'=>"Здоровье"
         ]
     ];

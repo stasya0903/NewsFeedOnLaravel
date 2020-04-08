@@ -14,7 +14,7 @@ class CategoryController extends Controller
     public function index()
     {
         return view('admin.news.categories.index', [
-            'categories' => Category::getCategories(),
+            'categories' => Category::all(),
         ]);
     }
 
@@ -24,7 +24,8 @@ class CategoryController extends Controller
             $request->flash();
             $result = Category::create($request);
             if ($result) {
-                return redirect()->route('admin.news.categories.index')->with('success',"Категория успешно добавлена");
+                return redirect()->route('admin.news.categories.index')->with(
+                    'success', "Категория успешно добавлена");
             }
         }
         return view('admin.news.categories.create', [
@@ -33,28 +34,19 @@ class CategoryController extends Controller
 
     public function delete($itemId)
     {
-        if (News::deleteNewsItem($itemId)){
-            return redirect()->route('admin.news.categories.index')->with('success',"Категория успешно удалена");
+        if (News::deleteNewsItem($itemId)) {
+            return redirect()->route('admin.news.categories.index')->with(
+                'success', "Категория успешно удалена");
         }
     }
 
-    public function show($id)
+    public function show($category)
     {
-        $newsItem = DB::table('news')->find($id);
-        if (!$newsItem) {
-            abort(404, "Извините такой новости нет");
-        }
-        return view('admin.news.one')->with('news', $newsItem);
-    }
+        $category = Category::where('slot', $category)->firstOrFail();
 
-    public function showOne($category){
-        $category = Category::getCategoryByName($category);
-        if(!$category){
-            abort(404, "Извините такой Категории нет");
-        }
         return view('admin.news.categories.show', [
-            'news'=> News::getNewsByCategoryId($category->id),
-            'category'=> $category
+            'news' => News::getNewsByCategoryId($category->id),
+            'category' => $category
         ]);
     }
 

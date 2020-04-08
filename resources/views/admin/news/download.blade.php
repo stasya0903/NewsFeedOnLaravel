@@ -2,7 +2,7 @@
 
 
 @section('menu')
-    @include('admin.menu')
+    @include('menu')
 @endsection
 
 @section("content")

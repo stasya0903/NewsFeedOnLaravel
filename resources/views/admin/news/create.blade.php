@@ -2,7 +2,7 @@
 
 
 @section('menu')
-    @include('admin.menu')
+    @include('menu')
 @endsection
 
 @section("content")
@@ -15,7 +15,7 @@
                     <div class="card-header pink-bg text-white">{{ __('Добавить новость') }}</div>
 
                     <div class="card-body">
-                        <form enctype="multipart/form-data" method="POST" action="{{ route('admin.news.create') }}">
+                        <form enctype="multipart/form-data" method="POST" action="{{ route('admin.news.store') }}">
                             @csrf
                             <div class="form-group row">
                                 <label for="title"
