@@ -10,10 +10,16 @@ use App\Http\Controllers\Controller;
 class NewsController extends Controller
 {
     public function index (){
-        return view('news.index')->with('news', News::all());
+        return view('news.index', [
+            'news'=> News::all(),
+            'categories'=> Category::all()->keyBy('id')
+        ]);
     }
     public function show(News $news){
-        return view('news.one')->with('news', $news);
+        return view('news.one', [
+            'news'=> $news,
+            'category'=> $news->category()->first()
+        ]);
     }
 
 }

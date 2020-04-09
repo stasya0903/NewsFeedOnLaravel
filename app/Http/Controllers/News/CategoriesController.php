@@ -13,7 +13,10 @@ class CategoriesController extends Controller
         return view('news.categories')->with('categories', Category::all() );
     }
 
-    public function showOne(Category $category){
-        return view('news.one')->with('news', $news);
+    public function show(Category $category){
+        return view('news.oneCategory', [
+            'category'=>$category,
+            'news'=> $category->news()->get()
+        ]);
     }
 }

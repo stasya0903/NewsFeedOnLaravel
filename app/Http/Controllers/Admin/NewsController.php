@@ -14,18 +14,6 @@ use NunoMaduro\Collision\Writer;
 
 class NewsController extends Controller
 {
-    public function index()
-    {
-        return view('admin.news.index', [
-            'categories' => Category::all(),
-            'news' => News::all()
-        ]);
-    }
-
-    public function show(News $news)
-    {
-        return view('admin.news.one')->with('news', $news);
-    }
 
     public function create()
     {
@@ -40,7 +28,7 @@ class NewsController extends Controller
             [
                 'title' => request()['title'],
                 'text' => request()['text'],
-                'image' => News::saveImg($request),
+                'image' => $this->saveImg($request),
                 'isPrivate' => isset($request->isPrivate)
             ]);
         return redirect(route('admin.news.show', $data->id));
@@ -109,6 +97,16 @@ class NewsController extends Controller
     public function EXCEL()
     {
         return Excel::download(new NewsExport, 'news.xlsx');
+    }
+
+
+    protected function saveImg($request){
+        $url = null;
+        if ($request->file('image')) {
+            $path = Storage::putFile('public/images', $request->file('image'));
+            $url =  Storage::url($path);
+        }
+        return $url;
     }
 
 

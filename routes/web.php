@@ -27,14 +27,14 @@ Route::group([
     'as' => 'news.'
 ],
     function () {
-        Route::get('/', 'NewsController@index')->name('index');
-        Route::get('show/{news}/', 'NewsController@show')->name('show');
+        Route::get('/index', 'NewsController@index')->name('index');
+        Route::get('/show/{news}', 'NewsController@show')->name('show');
 
         Route::group([
             'prefix' => 'categories',
             'as' => 'categories.'
         ], function () {
-            Route::get('/', 'CategoriesController@index')->name('index');
+            Route::get('/index', 'CategoriesController@index')->name('index');
             Route::get('/show/{category}', 'CategoriesController@show')->name('show');
         });
 
@@ -47,7 +47,7 @@ Route::group([
     'as' => 'admin.'
 ],
     function () {
-        Route::get('/', 'IndexController@index')->name('index');
+        Route::get('/index', 'IndexController@index')->name('index');
         Route::group([
             'prefix' => 'news',
             'as' => 'news.'
@@ -66,7 +66,6 @@ Route::group([
                 'as' => 'categories.'
             ], function () {
                 Route::get('/index', 'CategoryController@index')->name('index');
-                Route::get('/show/{category}', 'CategoryController@show')->name('show');
                 Route::get('/create', 'CategoryController@create')->name('create');
                 Route::post('/create', 'CategoryController@store')->name('store');
                 Route::get('/edit', 'CategoryController@edit')->name('edit');

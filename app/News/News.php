@@ -13,13 +13,10 @@ class News extends Model
 
     protected $fillable = ['title','text', 'image', 'isPrivate'];
 
-    public static function saveImg($request){
-        $url = null;
-        if ($request->file('image')) {
-            $path = Storage::putFile('public/images', $request->file('image'));
-            $url =  Storage::url($path);
-        }
-        return $url;
+    public function category (){
+        return  $this->belongsTo(Category::class, 'category_id');
     }
+
+
 
 }

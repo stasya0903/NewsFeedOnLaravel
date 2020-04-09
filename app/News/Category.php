@@ -12,4 +12,8 @@ class Category extends Model
         return 'slug';
     }
 
+    public function news(){
+        return $this->hasMany(News::class, 'category_id');
+    }
+
 }
