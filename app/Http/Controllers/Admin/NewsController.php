@@ -8,6 +8,7 @@ use App\News\NewsExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use NunoMaduro\Collision\Writer;
 
@@ -16,51 +17,74 @@ class NewsController extends Controller
     public function index()
     {
         return view('admin.news.index', [
-            'categories' => Category::getCategories(),
-            'news'=> News::getNews()
+            'categories' => Category::all(),
+            'news' => News::all()
         ]);
     }
 
-    public function create(Request $request)
+    public function show(News $news)
     {
-        if ($request->isMethod("post")) {
-            $request->flash();
-            $result = News::create($request->except('_token'));
-            if ($result) {
-                return redirect()->route('admin.news.index');
-            }
-        }
+        return view('admin.news.one')->with('news', $news);
+    }
+
+    public function create()
+    {
         return view('admin.news.create', [
-            'categories' => Category::getCategories()
+            'categories' => Category::all(),
         ]);
     }
 
-    public function delete($itemId)
+    public function store(Request $request)
     {
-       if (News::deleteNewsItem($itemId)){
-           return view('admin.news.index', [
-               'categories' => Category::getCategories(),
-               'news'=> News::getNews()
-           ]);
-       } else {
-           return view('admin.news.index', [
-               'categories' => Category::getCategories(),
-               'news'=> News::getNews(),
-           ]);
-       }
+        $data = News::create(
+            [
+                'title' => request()['title'],
+                'text' => request()['text'],
+                'image' => News::saveImg($request),
+                'isPrivate' => isset($request->isPrivate)
+            ]);
+        return redirect(route('admin.news.show', $data->id));
+    }
+
+    public function edit()
+    {
+        return view('admin.news.edit', [
+            'news' => News::all(),
+            'categories' => Category::all(),
+        ]);
+
+    }
+    public function editOne(News $news)
+    {
+        return view('admin.news.update', [
+            'news' => $news,
+            'categories' => Category::all(),
+        ]);
 
     }
 
-    public function show($id)
+    public function update(News $news, Request $request)
     {
-        $newsItem = News::getNewsId($id);
-        if (!$newsItem) {
-            abort(404, "Извините такой новости нет");
+        $dataToUpdate = $request->except('_token');
+        $news->update($dataToUpdate);
+        return redirect(route('admin.news.update', $news->id))->with("success", 'Новость успешно обновлена');
+
+    }
+
+    public function delete(News $news)
+    {
+        try {
+            $news->delete();
+            return redirect()->route('admin.news.edit')->with("success", 'Новость успешно удалена');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.news.edit')->with("success", 'Ошибка сервера');
+
         }
-        return view('admin.news.one')->with('news', $newsItem);
+
     }
 
-    public function download(Request $request)
+
+    public function export(Request $request)
     {
         if ($request->isMethod("post")) {
 
@@ -76,7 +100,7 @@ class NewsController extends Controller
 
     public function JSON()
     {
-        return response()->json(News::getNews())
+        return response()->json(DB::table('news')->get())
             ->header('Content-Disposition', 'attachment; filename = "json.txt"')
             ->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
@@ -84,10 +108,7 @@ class NewsController extends Controller
 
     public function EXCEL()
     {
-        $export = new NewsExport([
-            News::getNews()
-        ]);
-        return Excel::download($export, 'news.xlsx');
+        return Excel::download(new NewsExport, 'news.xlsx');
     }
 
 

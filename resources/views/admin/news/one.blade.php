@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    @parent {{$news['title']}}
+    @parent {{$news->title}}
 @endsection
 
 @section('menu')
@@ -24,10 +24,10 @@
         </h3>
         <div class="blog-post">
             <h2 class="blog-post-title">
-                {{ $news['title'] }}
+                {{ $news->title }}
             </h2>
             <p class="blog-post-meta">January 1, 2014 by <span class="yellow">Mark</span></p>
-            <p>{{ $news['text'] }}</p>
+            <p>{{ $news->text }}</p>
         </div>
     </div>
     <aside class="col-md-4 blog-sidebar">

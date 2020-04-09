@@ -28,14 +28,14 @@ Route::group([
 ],
     function () {
         Route::get('/', 'NewsController@index')->name('index');
-        Route::get('showOne/{id}/', 'NewsController@show')->name('show');
+        Route::get('show/{news}/', 'NewsController@show')->name('show');
 
         Route::group([
             'prefix' => 'categories',
             'as' => 'categories.'
         ], function () {
             Route::get('/', 'CategoriesController@index')->name('index');
-            Route::get('/{category}', 'CategoriesController@showOne')->name('show');
+            Route::get('/show/{category}', 'CategoriesController@show')->name('show');
         });
 
 
@@ -48,16 +48,33 @@ Route::group([
 ],
     function () {
         Route::get('/', 'IndexController@index')->name('index');
-        Route::match(['get', 'post'], '/create', 'NewsController@create')->name('create');
         Route::group([
             'prefix' => 'news',
             'as' => 'news.'
         ], function () {
-            Route::get('/', 'NewsController@index')->name('index');
-            Route::get('showOne/{id}/', 'NewsController@show')->name('show');
-            Route::match(['get', 'post'], '/download', 'NewsController@download')->name('download');
-            Route::match(['get', 'post'], '/delete/{id}', 'NewsController@delete')->name('delete');
-            //Route::get('/{category}', 'CategoriesController@showOne')->name('show');
+            Route::get('/index', 'NewsController@index')->name('index');
+            Route::get('/create', 'NewsController@create')->name('create');
+            Route::post('/create', 'NewsController@store')->name('store');
+            Route::get('/edit', 'NewsController@edit')->name('edit');
+            Route::get('/show/{news}', 'NewsController@show')->name('show');
+            Route::delete( '/delete/{news}', 'NewsController@delete')->name('delete');
+            Route::get( '/update/{news}', 'NewsController@editOne')->name('editOne');
+            Route::post( '/update/{news}', 'NewsController@update')->name('update');
+            Route::match(['get', 'post'], '/export', 'NewsController@export')->name('export');
+            Route::group([
+                'prefix' => 'categories',
+                'as' => 'categories.'
+            ], function () {
+                Route::get('/index', 'CategoryController@index')->name('index');
+                Route::get('/show/{category}', 'CategoryController@show')->name('show');
+                Route::get('/create', 'CategoryController@create')->name('create');
+                Route::post('/create', 'CategoryController@store')->name('store');
+                Route::get('/edit', 'CategoryController@edit')->name('edit');
+                Route::get('/show/{category}', 'CategoryController@show')->name('show');
+                Route::delete( '/delete/{category}', 'CategoryController@delete')->name('delete');
+                Route::get( '/update/{category}', 'CategoryController@editOne')->name('editOne');
+                Route::post( '/update/{category}', 'CategoryController@update')->name('update');
+            });
         });
     });
 
