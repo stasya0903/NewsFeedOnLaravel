@@ -11,7 +11,7 @@ class NewsController extends Controller
 {
     public function index (){
         return view('news.index', [
-            'news'=> News::all(),
+            'news' => News::query()->orderByDesc('created_at')->paginate(4),
             'categories'=> Category::all()->keyBy('id')
         ]);
     }

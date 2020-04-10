@@ -60,7 +60,7 @@
 
                         </form>
                         <td>
-                        <form method="POST" action="{{route('admin.news.categories.delete',$item->id)}}">
+                        <form method="POST" action="{{route('admin.news.categories.delete',$item->slug)}}">
                             @csrf
                             @method('DELETE')
                             <input type="submit">
