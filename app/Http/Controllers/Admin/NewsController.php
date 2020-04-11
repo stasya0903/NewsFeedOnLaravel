@@ -45,13 +45,7 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = News::create(
-            [
-                'title' => request()['title'],
-                'text' => request()['text'],
-                'image' => $this->saveImg($request),
-                'isPrivate' => isset($request->isPrivate)
-            ]);
+        $data = News::create($request->all());
         return redirect(route('admin.news.index'))
             ->with("success", 'Новость успешно добавлена');
     }
