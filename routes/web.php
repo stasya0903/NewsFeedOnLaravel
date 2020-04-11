@@ -55,21 +55,12 @@ Route::group([
         ], function () {
             Route::get('/export', 'NewsController@export')->name('export');
             Route::post('/export', 'NewsController@exportRespond')->name('export');
-            Route::group([
-                'prefix' => 'categories',
-                'as' => 'categories.'
-            ], function () {
-                Route::get('/index', 'CategoryController@index')->name('index');
-                Route::get('/create', 'CategoryController@create')->name('create');
-                Route::post('/create', 'CategoryController@store')->name('store');
-                Route::get('/edit', 'CategoryController@edit')->name('edit');
-                Route::get('/show/{category}', 'CategoryController@show')->name('show');
-                Route::delete('/delete/{category}', 'CategoryController@delete')->name('delete');
-                Route::get('/update/{category}', 'CategoryController@editOne')->name('editOne');
-                Route::post('/update/{category}', 'CategoryController@update')->name('update');
-            });
         });
-        Route::resource('news', 'NewsController');
+        Route::resources([
+            'news' => 'NewsController',
+            'category' => 'CategoryController'
+        ]);
+
     });
 
 

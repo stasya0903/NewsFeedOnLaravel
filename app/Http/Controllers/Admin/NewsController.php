@@ -52,7 +52,7 @@ class NewsController extends Controller
                 'image' => $this->saveImg($request),
                 'isPrivate' => isset($request->isPrivate)
             ]);
-        return redirect(route('admin.news'))
+        return redirect(route('admin.news.index'))
             ->with("success", 'Новость успешно добавлена');
     }
 
