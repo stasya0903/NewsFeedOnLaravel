@@ -27,8 +27,9 @@
                 <tbody>
                 @foreach($categories as $item)
                     <tr>
-                        <form method="POST" action="{{route('admin.news.categories.update',$item->id)}}">
+                        <form method="POST" action="{{route('admin.category.update',$item->slug)}}">
                             @csrf
+                            @method("PUT")
                             <td>
                                 <input id="title" type="text"
                                        class="form-control bg-transparent border-0 @error('title') is-invalid @enderror"
@@ -44,7 +45,7 @@
                             <td>
                                 <input id="slot" type="text"
                                        class="form-control bg-transparent  border-0 @error('title') is-invalid @enderror"
-                                       name="slot"
+                                       name="slug"
                                        value="{{ $item->slug}}" required>
 
                                 @error('title')
@@ -60,7 +61,7 @@
 
                         </form>
                         <td>
-                        <form method="POST" action="{{route('admin.news.categories.delete',$item->id)}}">
+                        <form method="POST" action="{{route('admin.category.destroy',$item->slug)}}">
                             @csrf
                             @method('DELETE')
                             <input type="submit">
@@ -72,7 +73,7 @@
 
 
                 @endforeach
-                <form enctype="multipart/form-data" method="POST" action="{{ route('admin.news.categories.store') }}">
+                <form enctype="multipart/form-data" method="POST" action="{{ route('admin.category.store') }}">
                     @csrf
                     <tr>
                         <td>
@@ -88,7 +89,7 @@
                         </td>
                         <td>
                             <input id="slot" type="text"
-                                   class="bg-transparent form-control @error('title') is-invalid @enderror" name="slot"
+                                   class="bg-transparent form-control @error('title') is-invalid @enderror" name="slug"
                                    value="{{ old('slug') }}" required>
 
                             @error('title')

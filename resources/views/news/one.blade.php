@@ -20,7 +20,7 @@
         </div>
 
         <h3 class="pb-4  mb-4 font-italic border-bottom">
-            Источник
+            {{$category->title}}
         </h3>
         <div class="blog-post">
             <h2 class="blog-post-title">

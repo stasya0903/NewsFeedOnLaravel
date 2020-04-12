@@ -13,6 +13,7 @@
         <div class="row mt-4">
             <form enctype="multipart/form-data" method="POST" action="{{ route('admin.news.update', $news->id) }}">
                 @csrf
+                @method('PUT')
 
                 <div class="row justify-content-md-center">
 
@@ -54,7 +55,7 @@
                               name="text"
                               required>{{ $news->text }} </textarea>
                 </div>
-                <div class="col-md-8 offset-md-4">
+                <div class="col-md-8 offset-md-5">
                     <button type="submit" class="btn btn-outline-secondary pink-bgHover">
                         Обновить новость
                     </button>

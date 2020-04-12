@@ -31,6 +31,7 @@
                     <tr>
                         <form method="POST" action="{{route('admin.news.update',$item->id)}}">
                             @csrf
+                            @method('PUT')
                             <td>
                                 <textarea cols="40"
                                           rows="1"
@@ -49,18 +50,18 @@
                                 <select name="category_id" id="category"
                                         class="border-0 bg-transparent form-control @error('category') is-invalid @enderror">
                                     @foreach($categories as $category)
-                                        <option value="{{$category->id}}">{{$category->title}}</option>
+                                        <option @if ($category->id == $item->category_id) selected @endif value="{{$category->id}}">{{$category->title}}</option>
                                     @endforeach
                                 </select>
                             </td>
 
                             <td><input type="submit"></td>
 
-                            <td><a href="{{route('admin.news.editOne', $item->id) }}"> update </a></td>
+                            <td><a href="{{route('admin.news.edit', $item->id) }}"> update </a></td>
 
                             <td>
                         </form>
-                        <form method="POST" action="{{route('admin.news.delete',$item->id)}}">
+                        <form method="POST" action="{{route('admin.news.destroy',$item->id)}}">
                             @csrf
                             @method('DELETE')
                             <input type="submit">
@@ -74,6 +75,8 @@
 
                 </tbody>
             </table>
+
+            <div> {{ $news->links() }}</div>
         </div>
     </div>
 @endsection
