@@ -34,6 +34,7 @@ class NewsController extends Controller
     {
         return response()->view('admin.news.create', [
             'categories' => Category::all(),
+            'news'=> new News()
         ]);
     }
 
@@ -45,9 +46,16 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = News::create($request->all());
-        return redirect(route('admin.news.index'))
-            ->with("success", 'Новость успешно добавлена');
+        $result = News::create($this->validateData($request));
+        if ($result) {
+            return redirect(route('admin.news.index'))
+                ->with("success", 'Новость успешно добавлена');
+        }
+        $request->flash();
+        return redirect(route('admin.news.create'))
+            ->with("error", 'Ошибка добавления новости');
+
+
     }
 
     /**
@@ -58,7 +66,7 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
-        return response()->view('admin.news.update', [
+        return response()->view('admin.news.create', [
             'news' => $news,
             'categories' => Category::all(),
         ]);
@@ -69,14 +77,20 @@ class NewsController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\News\News $news
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, News $news)
     {
-        $dataToUpdate = $request->except('_token');
-        $news->update($dataToUpdate);
-        return redirect(route('admin.news.index'))
-            ->with("success", 'Новость успешно обновлена');
+        $result = $news->update($this->validateData($request));
+        if ($result) {
+            return redirect(route('admin.news.index'))
+                ->with("success", 'Новость успешно обновлена');
+        } else {
+            $request->flash();
+            return redirect(route('admin.news.create'))
+                ->with("error", 'Ошибка обновления новости');
+        }
+
     }
 
     /**
@@ -128,7 +142,7 @@ class NewsController extends Controller
      * @return mixed
      */
 
-    public function exportRespond (Request $request)
+    public function exportRespond(Request $request)
     {
         $downloadRequest = $request->input('format');
 
@@ -159,5 +173,10 @@ class NewsController extends Controller
     public function EXCEL()
     {
         return Excel::download(new NewsExport, 'news.xlsx');
+    }
+
+    public function validateData($request)
+    {
+        return $this->validate($request, News::rules(), [], News::attributeNames());
     }
 }
