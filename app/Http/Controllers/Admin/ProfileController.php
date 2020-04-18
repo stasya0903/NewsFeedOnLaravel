@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
@@ -20,6 +21,7 @@ class ProfileController extends Controller
 
         return response()->view('admin.profile', [
             'users' => User::all(),
+            'user'=>Auth::user()
         ]);
     }
 
@@ -27,27 +29,25 @@ class ProfileController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\News\News $news
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param User $user
+     * @return void
      */
 
-    public function update(Request $request)
+    public function update(Request $request, User $user)
     {
-        $user = Auth::user();
-        $errors = [];
-
-            if (Hash::check($request->post('oldPassword'), $user->password)) {
-                $user->update([
-                    'name' => $request->post('name'),
-                    'password' => Hash::make($request->post('password')),
-                    'email' => $request->post('email')
-                ]);
-                $request->session()->flash('success', 'Данные пользователя изменены!');
-            } else {
-                $errors['oldPassword'][] = "Неверно введен текущий пароль";
+        $currentUser = Auth::user();
+        if ($currentUser->id !== $user->id){
+            $result = $user->update($request->only('is_admin'));
+            if ($result) {
+                return redirect(route('admin.users.edit'))
+                    ->with("success", 'Статус пользователя успешно обнавлен');
             }
-            return redirect()->route('profile.edit')->withErrors($errors);
-
+            return redirect(route('admin.users.edit'))
+                ->with("error", 'Ошибка обновления');
+        } else {
+            return redirect(route('admin.users.edit'))
+                ->with("error", 'Вы не можете обновить свой статус');
+        }
     }
 
 }

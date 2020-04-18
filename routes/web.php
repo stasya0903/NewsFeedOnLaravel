@@ -80,7 +80,7 @@ Route::group([
             'as' => 'users.'
         ], function () {
             Route::get('/edit', 'ProfileController@edit')->name('edit');
-            Route::put('/update', 'ProfileController@update')->name('update');
+            Route::put('/update/{user}', 'ProfileController@update')->name('update');
         });
 
     });
