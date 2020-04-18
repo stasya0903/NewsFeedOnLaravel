@@ -14,6 +14,14 @@ use App\News\Category;
 */
 
 Route::get('/', 'HomeController@index')->name('Home');
+Route::group([
+    'prefix' => 'profile',
+    'as' => 'profile.',
+    'middleware'=> 'auth'
+], function () {
+    Route::get('/', 'ProfileController@edit')->name('edit');
+    Route::put('/', 'ProfileController@update')->name('update');
+});
 Auth::routes();
 /*
 |--------------------------------------------------------------------------
@@ -41,11 +49,18 @@ Route::group([
 
 
     });
-
+/*
+|--------------------------------------------------------------------------
+|Admin
+|--------------------------------------------------------------------------
+|   Routes for the admin functionality
+|
+*/
 Route::group([
     'prefix' => 'admin',
     'namespace' => 'Admin',
-    'as' => 'admin.'
+    'as' => 'admin.',
+    'middleware'=>['auth','is_admin']
 ],
     function () {
         Route::get('/index', 'IndexController@index')->name('index');
@@ -60,6 +75,13 @@ Route::group([
             'news' => 'NewsController',
             'category' => 'CategoryController'
         ]);
+        Route::group([
+            'prefix' => 'users',
+            'as' => 'users.'
+        ], function () {
+            Route::get('/edit', 'ProfileController@edit')->name('edit');
+            Route::put('/update', 'ProfileController@update')->name('update');
+        });
 
     });
 

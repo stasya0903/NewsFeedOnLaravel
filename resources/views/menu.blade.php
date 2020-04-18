@@ -11,23 +11,26 @@
                     <li class="nav-item {{ request()->routeIs('Home')?'active':'' }}"><a
                             href="{{ route('Home') }}" class="nav-link">Главная</a></li>
                 @else
-                    <li class="nav-item dropdown"><a class='nav-link dropdown-toggle' href="{{route('admin.index') }}"
-                                                     id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-                                                     aria-expanded="false">Админка</a>
-                        <div class="dropdown-menu bg-light " aria-labelledby="dropdown01">
-                            <a href="{{route('admin.index')}}" class="dropdown-item hoverYellow ">Главная</a>
-                            <a href="{{route('admin.news.create')}}" class="dropdown-item hoverYellow ">Добавить
-                                новость</a>
-                            <a href="{{route('admin.news.index')}}" class="dropdown-item hoverYellow ">Редактировать
-                                новости</a>
-                            <a href="{{route('admin.category.index')}}" class="dropdown-item hoverYellow ">Редактировать категории</a>
-                            <a href="{{route('admin.news.export')}}" class="dropdown-item hoverYellow ">Выгрузить
-                                новости</a>
-                        </div>
-                    </li>
-                    <li class="nav-item {{ request()->routeIs('admin.index')?'active':'' }}">
-                        <a href="{{route('admin.index')}}" class="nav-link">Главная</a>
-                    </li>
+                    @if (Route::has('admin.index'))
+                        <li class="nav-item dropdown"><a class='nav-link dropdown-toggle' href="{{route('admin.index') }}"
+                                                         id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+                                                         aria-expanded="false">Админка</a>
+                            <div class="dropdown-menu bg-light " aria-labelledby="dropdown01">
+                                <a href="{{route('admin.index')}}" class="dropdown-item hoverYellow ">Главная</a>
+                                <a href="{{route('admin.news.create')}}" class="dropdown-item hoverYellow ">Добавить
+                                    новость</a>
+                                <a href="{{route('admin.news.index')}}" class="dropdown-item hoverYellow ">Редактировать
+                                    новости</a>
+                                <a href="{{route('admin.category.index')}}" class="dropdown-item hoverYellow ">Редактировать категории</a>
+                                <a href="{{route('admin.news.export')}}" class="dropdown-item hoverYellow ">Выгрузить
+                                    новости</a>
+                            </div>
+                        </li>
+                        <li class="nav-item {{ request()->routeIs('admin.index')?'active':'' }}">
+                            <a href="{{route('admin.index')}}" class="nav-link">Главная</a>
+                        </li>
+                    @endif
+
                 @endguest
                 <li class="nav-item {{ request()->routeIs('news.index')?'active':'' }}"><a
                         href="{{ route('news.index') }}" class="nav-link">News</a></li>
