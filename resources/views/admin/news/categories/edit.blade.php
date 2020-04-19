@@ -34,7 +34,7 @@
                                 <input id="title" type="text"
                                        class="form-control bg-transparent border-0 {{($errors->{$item->slug}->first('title')) ?'is-invalid' : ''}}"
                                        name="title"
-                                       value="{{ $item->title  }}" required>
+                                       value="{{ $item->title  }}" >
                                 @if ($errors->{$item->slug}->has('title'))
                                     <span class="invalid-feedback" role="alert">
                                         {{$errors->{$item->slug}->first('title')}}
@@ -45,7 +45,7 @@
                                 <input id="slot" type="text"
                                        class="form-control bg-transparent  border-0 {{($errors->{$item->slug}->first('slug')) ?'is-invalid' : ''}}"
                                        name="slug"
-                                       value="{{ $item->slug}}" required>
+                                       value="{{ $item->slug}}" >
 
                                 @if ($errors->{$item->slug}->has('slug'))
                                     <span class="invalid-feedback" role="alert">
@@ -78,7 +78,7 @@
                         <td>
                             <input id="title" type="text"
                                    class="bg-transparent form-control @error('title') is-invalid @enderror" name="title"
-                                   value="{{ old('title') }}" required>
+                                   value="{{ old('title') }}" >
 
                             @error('title')
                             <span class="invalid-feedback" role="alert">
@@ -89,7 +89,7 @@
                         <td>
                             <input id="slot" type="text"
                                    class="bg-transparent form-control @error('slug') is-invalid @enderror" name="slug"
-                                   value="{{ old('slug') }}" required>
+                                   value="{{ old('slug') }}" >
 
                             @error('slug')
                             <span class="invalid-feedback" role="alert">

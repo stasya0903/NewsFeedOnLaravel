@@ -53,7 +53,7 @@
                                           id="title{{$item->id}}" type="text"
                                           class="border-0 bg-transparent  @error('title') is-invalid @enderror"
                                           name="title"
-                                          required>{{ $item->title }} </textarea>
+                                          >{{ $item->title }} </textarea>
                             </td>
                             <td>
                                 <select name="category_id" id="category"

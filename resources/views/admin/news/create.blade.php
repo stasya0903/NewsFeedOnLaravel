@@ -24,7 +24,7 @@
                                 <div class="col-md-6">
                                     <input id="title" type="text"
                                            class="form-control @error('title') is-invalid @enderror" name="title"
-                                           value="{{  old('title') ?? $news->title}}" required>
+                                           value="{{  old('title') ?? $news->title}}" >
                                     @error('title')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -62,7 +62,7 @@
                                     <textarea id="title" type="text"
                                               class="form-control @error('text') is-invalid @enderror"
                                               name="text"
-                                              required>{{ old('text') ?? $news->text }}</textarea>
+                                              >{{ old('text') ?? $news->text }}</textarea>
                                     @error('text')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
