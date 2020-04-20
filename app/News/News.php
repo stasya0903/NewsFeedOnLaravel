@@ -22,8 +22,8 @@ class News extends Model
     public static function  rules(){
         $tableNameCategory = (new Category())->getTable();
         return[
-            'title' => 'required|min:5|max:20',
-            'text'=> 'sometimes|required|min:1|max:2000',
+            'title' => 'required|min:5',
+            'text'=> 'sometimes|required|min:1',
             'image'=> 'image|size:5000' ,
             'isPrivate' => 'boolean',
             'category_id' => "exists:{$tableNameCategory},id"

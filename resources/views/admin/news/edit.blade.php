@@ -15,19 +15,19 @@
 
     <div class="container">
 
-            @if ($errors->count() > 0)
+        @if ($errors->count() > 0)
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
 
-                    @foreach($errors->all() as $error)
-                       <p>{{ $error }}</p>
-                    @endforeach
+                @foreach($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
 
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
 
             </div>
-            @endif
+        @endif
 
         <div class="">
             <table class="table table-striped">
@@ -53,7 +53,7 @@
                                           id="title{{$item->id}}" type="text"
                                           class="border-0 bg-transparent  @error('title') is-invalid @enderror"
                                           name="title"
-                                          >{{ $item->title }} </textarea>
+                                >{{ $item->title }} </textarea>
                             </td>
                             <td>
                                 <select name="category_id" id="category"
@@ -65,17 +65,20 @@
                                 </select>
                             </td>
 
-                            <td><input type="submit"></td>
-
-                            <td><a href="{{route('admin.news.edit', $item->id) }}"> update </a></td>
-
                             <td>
+                                <button type="submit"> Сохранить</button>
+                            </td>
+
+                            <td><a href="{{route('admin.news.edit', $item->id) }}"> Подробнее</a></td>
                         </form>
-                        <form method="POST" action="{{route('admin.news.destroy',$item)}}">
-                            @csrf
-                            @method('DELETE')
-                            <input type="submit">
-                        </form>
+                        <td class="align-items-center">
+                            <form method="POST" action="{{route('admin.news.destroy',$item)}}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-transparent">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </form>
                         </td>
 
 

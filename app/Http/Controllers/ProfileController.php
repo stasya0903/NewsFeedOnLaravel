@@ -28,10 +28,9 @@ class ProfileController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\News\News $news
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse
      */
 
-    /** TODO validate data */
     public function update(Request $request)
     {
         $user = Auth::user();
@@ -40,11 +39,10 @@ class ProfileController extends Controller
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:8']
         ]);
-        $passwordValidationFails = Hash::check($request->post('oldPassword'), $user->password)
-                                ? "" : "Неверно введен текущий пароль";
-        $v->getMessageBag()->add('oldPassword', $passwordValidationFails);
+        $isPasswordCorrect = Hash::check($request->post('oldPassword'), $user->password);
+        $v->getMessageBag()->add('oldPassword', $isPasswordCorrect ? "" : "Неверно введен текущий пароль");
 
-        if (!$passwordValidationFails && !$v->fails()) {
+        if ($isPasswordCorrect && !$v->fails()) {
             $user->update([
                 'name' => $request->post('name'),
                 'password' => Hash::make($request->post('password')),
