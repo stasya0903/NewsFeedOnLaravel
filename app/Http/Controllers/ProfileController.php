@@ -35,19 +35,26 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
-        $errors = [];
+        $v = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string', 'min:8']
+        ]);
+        $passwordValidationFails = Hash::check($request->post('oldPassword'), $user->password)
+                                ? "" : "Неверно введен текущий пароль";
+        $v->getMessageBag()->add('oldPassword', $passwordValidationFails);
 
-            if (Hash::check($request->post('oldPassword'), $user->password)) {
-                $user->update([
-                    'name' => $request->post('name'),
-                    'password' => Hash::make($request->post('password')),
-                    'email' => $request->post('email')
-                ]);
-                $request->session()->flash('success', 'Данные пользователя изменены!');
-            } else {
-                $errors['oldPassword'][] = "Неверно введен текущий пароль";
-            }
-            return redirect()->route('profile.edit')->withErrors($errors);
+        if (!$passwordValidationFails && !$v->fails()) {
+            $user->update([
+                'name' => $request->post('name'),
+                'password' => Hash::make($request->post('password')),
+                'email' => $request->post('email')
+            ]);
+
+            $request->session()->flash('success', 'Данные пользователя изменены!');
+        }
+
+        return redirect()->route('profile.edit')->withInput()->withErrors($v);
 
     }
 

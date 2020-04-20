@@ -36,8 +36,9 @@
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
-                                           class="form-control @error('email') is-invalid @enderror" name="email"
-                                           value="{{ old('email') ?? $user->email }}" required autocomplete="email">
+                                           class="form-control @error('email') is-invalid @enderror"
+                                           name="email"
+                                           value="{{ old('email') ?? $user->email }}" autocomplete="email">
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -55,7 +56,8 @@
                                     <input id="password"
                                            type="password"
                                            class="form-control @error('oldPassword') is-invalid @enderror"
-                                           name="oldPassword">
+                                           name="oldPassword"
+                                           value="{{ old('oldPassword')}}">
 
                                     @error('oldPassword')
                                     <span class="invalid-feedback" role="alert">
@@ -74,7 +76,8 @@
                                            type="password"
                                            class="form-control @error('password') is-invalid @enderror"
                                            name="password"
-                                           required autocomplete="new-password">
+                                           value="{{ old('password') }}"
+                                           autocomplete="new-password">
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
