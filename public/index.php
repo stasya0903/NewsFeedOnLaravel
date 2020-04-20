@@ -6,7 +6,7 @@
  * @package  Laravel
  * @author   Taylor Otwell <taylor@laravel.com>
  */
-setlocale( LC_TIME, 'ru_RU', 'russian' );
+
 define('LARAVEL_START', microtime(true));
 
 /*

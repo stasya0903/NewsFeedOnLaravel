@@ -6,31 +6,31 @@
 @endsection
 
 @section("content")
-
-
     <div class="container">
+
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header pink-bg text-white">{{ __('Добавить новость') }}</div>
+                    <div class="card-header pink-bg text-white text-center">@if(!$news->id){{ __('Добавить новость') }} @else {{ __('Обновить новость') }} @endif</div>
 
                     <div class="card-body">
-                        <form enctype="multipart/form-data" method="POST" action="{{ route('admin.news.store') }}">
+                        <form enctype="multipart/form-data" method="POST" action="@if(!$news->id){{ route('admin.news.store') }}@else{{ route('admin.news.update', $news) }}@endif">
                             @csrf
+                            @if($news->id) @method('PUT') @endif
                             <div class="form-group row">
                                 <label for="title"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Название') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Заголовок') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="title" type="text"
                                            class="form-control @error('title') is-invalid @enderror" name="title"
-                                           value="{{ old('title') }}" required>
-
-                                    @error('email')
+                                           value="{{  old('title') ?? $news->title}}" >
+                                    @error('title')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
+
                                 </div>
                             </div>
 
@@ -42,11 +42,11 @@
                                     <select name="category_id" id="category"
                                             class="form-control @error('category') is-invalid @enderror">
                                         @foreach($categories as $item)
-                                            <option @if ($item->id == old('category')) selected @endif value="{{$item->id}}">{{$item->title}}</option>
+                                            <option @if ($item->id == old('category_id') || $item->id == $news->category_id) selected @endif value="{{$item->id}}">{{$item->title}}</option>
                                         @endforeach
                                     </select>
 
-                                    @error('password')
+                                    @error('category')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -60,10 +60,18 @@
 
                                 <div class="col-md-6">
                                     <textarea id="title" type="text"
-                                              class="form-control @error('title') is-invalid @enderror" name="text"
-                                              value="{{ old('title') }}" required>{{ old('text') }}</textarea>
+                                              class="form-control @error('text') is-invalid @enderror"
+                                              name="text"
+                                              >{{ old('text') ?? $news->text }}</textarea>
+                                    @error('text')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
+
+
 
                             <div class="form-group row">
 
@@ -71,32 +79,47 @@
 
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="private"
-                                               id="private" {{ old('remember') ? 'checked' : '' }}>
+                                               id="private" {{ old('private') ? 'checked' : '' ?? $item->isPrivate ? 'checked' : ''  }}>
 
-                                        <label class="form-check-label" for="remember">
+                                        <label class="form-check-label" for="private">
                                             {{ __('Приватная') }}
                                         </label>
+                                        @error('private')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="text"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Добавить изображение') }}
+                                       class="col-md-4 col-form-label text-md-right @error('image') is-invalid @enderror">{{ __('Добавить изображение') }}
                                     </label>
                                 <div class="col-md-6">
                                     <div class="form-check">
                                         <div class="form-group">
-                                            <input type="file" name="image">
+                                            <input type="file" name="image" class="@error('image') is-invalid @enderror">
+                                            @error('image')
+                                            <span class="invalid-feedback" role="alert" >
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                            @enderror
+
                                         </div>
+
                                     </div>
+
+
                                 </div>
+
                             </div>
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-outline-secondary pink-bgHover">
-                                        {{ __('Добавить новость') }}
+                                        @if($news->id){{ __('Обновить новость') }}@else{{ __('Добавить новость') }}@endif
                                     </button>
 
                                 </div>

@@ -12,8 +12,8 @@
     <div id="app">
 
     </div>
-
     <div class="container">
+
         <div class="">
             <table class="table table-striped">
                 <thead>
@@ -27,32 +27,31 @@
                 <tbody>
                 @foreach($categories as $item)
                     <tr>
-                        <form method="POST" action="{{route('admin.category.update',$item->slug)}}">
+                        <form method="POST" action="{{route('admin.category.update',$item)}}">
                             @csrf
                             @method("PUT")
                             <td>
                                 <input id="title" type="text"
-                                       class="form-control bg-transparent border-0 @error('title') is-invalid @enderror"
+                                       class="form-control bg-transparent border-0 {{($errors->{$item->slug}->first('title')) ?'is-invalid' : ''}}"
                                        name="title"
-                                       value="{{ $item->title }}" required>
-
-                                @error('title')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                       value="{{ $item->title  }}" >
+                                @if ($errors->{$item->slug}->has('title'))
+                                    <span class="invalid-feedback" role="alert">
+                                        {{$errors->{$item->slug}->first('title')}}
+                                        </span>
+                                @endif
                             </td>
                             <td>
                                 <input id="slot" type="text"
-                                       class="form-control bg-transparent  border-0 @error('title') is-invalid @enderror"
+                                       class="form-control bg-transparent  border-0 {{($errors->{$item->slug}->first('slug')) ?'is-invalid' : ''}}"
                                        name="slug"
-                                       value="{{ $item->slug}}" required>
+                                       value="{{ $item->slug}}" >
 
-                                @error('title')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                @if ($errors->{$item->slug}->has('slug'))
+                                    <span class="invalid-feedback" role="alert">
+                                        {{$errors->{$item->slug}->first('slug')}}
+                                        </span>
+                                @endif
 
                             </td>
 
@@ -61,7 +60,7 @@
 
                         </form>
                         <td>
-                        <form method="POST" action="{{route('admin.category.destroy',$item->slug)}}">
+                        <form method="POST" action="{{route('admin.category.destroy',$item)}}">
                             @csrf
                             @method('DELETE')
                             <input type="submit">
@@ -79,7 +78,7 @@
                         <td>
                             <input id="title" type="text"
                                    class="bg-transparent form-control @error('title') is-invalid @enderror" name="title"
-                                   value="{{ old('title') }}" required>
+                                   value="{{ old('title') }}" >
 
                             @error('title')
                             <span class="invalid-feedback" role="alert">
@@ -89,10 +88,10 @@
                         </td>
                         <td>
                             <input id="slot" type="text"
-                                   class="bg-transparent form-control @error('title') is-invalid @enderror" name="slug"
-                                   value="{{ old('slug') }}" required>
+                                   class="bg-transparent form-control @error('slug') is-invalid @enderror" name="slug"
+                                   value="{{ old('slug') }}" >
 
-                            @error('title')
+                            @error('slug')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

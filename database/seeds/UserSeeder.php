@@ -16,13 +16,14 @@ class UserSeeder extends Seeder
 
     private function getData()
     {
-
         $data = [
-                'name' => 'admin',
-                'email' => "stasya0903@mail.ru",
-                'password' =>'$2y$10$sMc.583LEGnE30MyhxrpjuPGEs5AuPcwxbMQ8..pz3.DFORR6LlcS'
-            ];
+            'is_admin' => true,
+            'name' => 'admin',
+            'email' => "stasya0903@mail.ru",
+            'password' => '$2y$10$sMc.583LEGnE30MyhxrpjuPGEs5AuPcwxbMQ8..pz3.DFORR6LlcS'
+        ];
 
         return $data;
     }
+
 }

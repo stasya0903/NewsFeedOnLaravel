@@ -24,7 +24,7 @@
                                 <div class="col-md-6">
                                     <input id="title" type="text"
                                            class="form-control @error('title') is-invalid @enderror" name="title"
-                                           value="{{ old('title') }}" required>
+                                           value="{{ old('title') }}" >
 
                                     @error('title')
                                     <span class="invalid-feedback" role="alert">
@@ -41,7 +41,7 @@
                                 <div class="col-md-6">
                                     <input id="slot" type="text"
                                            class="form-control @error('title') is-invalid @enderror" name="slot"
-                                           value="{{ old('slot') }}" required>
+                                           value="{{ old('slot') }}" >
 
                                     @error('title')
                                     <span class="invalid-feedback" role="alert">
