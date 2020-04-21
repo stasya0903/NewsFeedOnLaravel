@@ -53,6 +53,9 @@
                             </div>
                         </div>
 
+                        <li class="nav-item"><a class="nav-link"  href="{{ route('vkLogin') }}">VK Login</a>
+                        </li>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-outline-secondary pink-bgHover">

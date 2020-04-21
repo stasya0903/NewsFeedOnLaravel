@@ -10,15 +10,14 @@ use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class ParseController extends Controller
 {
+    /** TODO создать отдельную таблицу для источников, добавление id источника, CRUD источника  */
     protected $sourses = [
         ['name' => 'lenta',
-            'url' => 'http://img.lenta.ru/r/EX/import.rss'],
+            'url' => 'http://img.lenta.ru/r/EX/import.rss',],
         ['name' => 'rumbler',
             'url' => 'https://www.vedomosti.ru/rss/issue'],
         ['name' => 'ej',
             'url' => 'http://www.ej.by/news/news.rss']
-
-
     ];
 
     public
@@ -38,15 +37,15 @@ class ParseController extends Controller
     {
         $xml = XmlParser::load($source);
 
-        dd($xml);
+        /*     dd($xml);*/
         $data = $xml->parse([
-            'news' => ['uses' => 'channel.item[title,link,description,pubDate,enclosure::url,category]']
+            'news' => ['uses' => 'channel.item[guid,title,link,description,pubDate,enclosure::url,category]']
         ]);
         if (!$data) {
             return redirect(route('admin.news.index'))
                 ->with("error", 'Ошибка загрузки данных');
         }
-        //dd($data['news']);
+       /* dd($data);*/
         return $data['news'];
     }
 
@@ -62,7 +61,8 @@ class ParseController extends Controller
                     'text' => $item['description'],
                     'created_at' => $item['pubDate'],
                     'category_id' => $this->getCategoryId($item['category']),
-                    'image' => $item['enclosure::url']
+                    'image' => $item['enclosure::url'],
+                    'guid' => $item['guid'],
                 ]);
                 if (!$news->save()) {
                     return redirect(route('admin.news.index'))
@@ -70,22 +70,21 @@ class ParseController extends Controller
                 }
 
             }
-
-
         }
     }
 
     private
     function getCategoryId($categoryTitle)
     {
-        $category_id = 1;
         $category = Category::where('title', $categoryTitle)->get()->first();
         if (!$category) {
             $category = Category::create([
                 'title' => $categoryTitle,
                 'slug' => str_replace(' ', '_', $categoryTitle)
             ]);
-            $category->save();
+            if (!$category->save()) {
+                $category->id = 1;
+            };
         }
 
         return $category->id;
