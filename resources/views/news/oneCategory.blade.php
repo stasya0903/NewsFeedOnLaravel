@@ -26,7 +26,7 @@
                 <div class="col-md-3 d-flex">
 
                     <div class="blog-entry">
-                        <img src="https://via.placeholder.com/150x60" class="card-img-top" alt="...">
+                        <img src="{{$item->image ?? 'https://via.placeholder.com/150x100'}}" class="card-img-top" alt="...">
                         <div class="text p-4 float-left d-block">
                             <h3 class="heading text-left">{{$item->title}}</h3>
                             <p><a href="{{ route('news.show', $item->id)}}" class="btn-custom"><span

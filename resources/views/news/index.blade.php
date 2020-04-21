@@ -22,7 +22,7 @@
                         <a href="{{ route('news.show', $item->id) }}" class="stretched-link text-dark hoverYellow">Подробнее</a>
                     </div>
                     <div class="col-auto d-flex align-items-center">
-                        <img class="d-block" src="https://via.placeholder.com/150x100"alt="...">
+                        <img class="d-block" src="{{$item->image ?? 'https://via.placeholder.com/150x100'}}"alt="...">
                     </div>
                 </div>
             </div>

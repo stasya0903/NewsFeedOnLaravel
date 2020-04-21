@@ -16,7 +16,7 @@
 
     <div class="col-md-8 blog-main">
         <div class="card-img d-flex">
-            <img class='m-5 img-thumbnail' src="https://via.placeholder.com/250x150" alt="newsPic">
+            <img class='m-5 img-thumbnail' src="{{$news->image ?? 'https://via.placeholder.com/150x100'}}" alt="newsPic">
         </div>
 
         <h3 class="pb-4  mb-4 font-italic border-bottom">

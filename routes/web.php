@@ -64,6 +64,7 @@ Route::group([
 ],
     function () {
         Route::get('/index', 'IndexController@index')->name('index');
+        Route::get('/parser', 'ParseController@index')->name('parser');
         Route::group([
             'prefix' => 'news',
             'as' => 'news.'
