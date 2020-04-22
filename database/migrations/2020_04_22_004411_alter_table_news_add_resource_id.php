@@ -13,13 +13,13 @@ class AlterTableNewsAddResourceId extends Migration
      */
     public function up()
     {
-        Schema::table('news', function (Blueprint $table) {
+       /* Schema::table('news', function (Blueprint $table) {
             $table->unsignedBigInteger('recourse_id')->default('1');
             $table->foreign('recourse_id')
                 ->references('id')
                 ->on('resources')
                 ->onDelete('cascade');;
-        });
+        });*/
     }
 
     /**

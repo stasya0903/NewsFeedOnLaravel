@@ -11,7 +11,7 @@ use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class ParseController extends Controller
 {
-    /** TODO доделать отдельную таблицу для источников, добавление id источника, CRUD источника  */
+    /** TODO создать отдельную таблицу для источников, добавление id источника, CRUD источника  */
     protected $sourses = [
         ['name' => 'lenta',
             'url' => 'http://img.lenta.ru/r/EX/import.rss',],
@@ -24,8 +24,8 @@ class ParseController extends Controller
     public
     function index()
     {
-        foreach ($this->sourses as $resource) {
-            $this->pushToDb($this->getData($resource->xmlSrc), $resource->id);
+        foreach ($this->sourses as $source) {
+            $this->pushToDb($this->getData($source['url']));
         }
 
         return redirect(route('admin.news.index'))
@@ -37,8 +37,7 @@ class ParseController extends Controller
     function getData($source)
     {
         $xml = XmlParser::load($source);
-
-        /*     dd($xml);*/
+       /* dd($xml);*/
         $data = $xml->parse([
             'news' => ['uses' => 'channel.item[guid,title,link,description,pubDate,enclosure::url,category]']
         ]);
@@ -51,7 +50,7 @@ class ParseController extends Controller
     }
 
     public
-    function pushToDb($data, $resource_id)
+    function pushToDb($data)
     {
         foreach ($data as $items => $item) {
             $newsWithSameTitle = News::where('title', $item['title'])->get()->first();
@@ -64,7 +63,6 @@ class ParseController extends Controller
                     'category_id' => $this->getCategoryId($item['category']),
                     'image' => $item['enclosure::url'],
                     'guid' => $item['guid'],
-                    'resource_id'=> $resource_id
                 ]);
                 if (!$news->save()) {
                     return redirect(route('admin.news.index'))
@@ -75,7 +73,8 @@ class ParseController extends Controller
         }
     }
 
-    private function getCategoryId($categoryTitle)
+    private
+    function getCategoryId($categoryTitle)
     {
         $category = Category::where('title', $categoryTitle)->get()->first();
         if (!$category) {
