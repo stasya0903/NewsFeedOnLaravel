@@ -20,19 +20,26 @@
         </div>
 
         <h3 class="pb-4  mb-4 font-italic border-bottom">
-            {{$category->title}}
+
+            <img src="{{$resource->image ?? ''}}" alt="">
+            <p>{{$category->title}}</p>
         </h3>
         <div class="blog-post">
             <h2 class="blog-post-title">
                 {{ $news->title }}
             </h2>
-            <p class="blog-post-meta">January 1, 2014 by <span class="yellow">Mark</span></p>
+            <p class="blog-post-meta">{{$news->created_at }}
+               {{-- <a href="{{$resource->link}}" class="yellow">{{$resource->title}}</a>--}}
+
+            </p>
             <p>{{ $news->text }}</p>
+            {{--<p><a href="{{$news->guid ?? $resource->link}}" class="yellow"> Смотреть в источнике</a></p>--}}
+
         </div>
     </div>
     <aside class="col-md-4 blog-sidebar">
         <div class="p-4 mb-3 bg-light rounded">
-            <h4 class="font-italic">About</h4>
+            <h4 class="font-italic">Реклама</h4>
             <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
         </div>
     </aside>

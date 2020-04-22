@@ -2,6 +2,7 @@
 
 namespace App\News;
 
+use App\Resource;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +19,10 @@ class News extends Model
 
     public function category (){
         return  $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function resource (){
+        return  $this->belongsTo(Resource::class, 'category_id');
     }
     public static function  rules(){
         $tableNameCategory = (new Category())->getTable();

@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\News\Category;
 use App\News\News;
+use App\Resource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class ParseController extends Controller
 {
-    /** TODO создать отдельную таблицу для источников, добавление id источника, CRUD источника  */
+    /** TODO доделать отдельную таблицу для источников, добавление id источника, CRUD источника  */
     protected $sourses = [
         ['name' => 'lenta',
             'url' => 'http://img.lenta.ru/r/EX/import.rss',],
@@ -23,8 +24,8 @@ class ParseController extends Controller
     public
     function index()
     {
-        foreach ($this->sourses as $source) {
-            $this->pushToDb($this->getData($source['url']));
+        foreach ($this->sourses as $resource) {
+            $this->pushToDb($this->getData($resource->xmlSrc), $resource->id);
         }
 
         return redirect(route('admin.news.index'))
@@ -50,7 +51,7 @@ class ParseController extends Controller
     }
 
     public
-    function pushToDb($data)
+    function pushToDb($data, $resource_id)
     {
         foreach ($data as $items => $item) {
             $newsWithSameTitle = News::where('title', $item['title'])->get()->first();
@@ -63,6 +64,7 @@ class ParseController extends Controller
                     'category_id' => $this->getCategoryId($item['category']),
                     'image' => $item['enclosure::url'],
                     'guid' => $item['guid'],
+                    'resource_id'=> $resource_id
                 ]);
                 if (!$news->save()) {
                     return redirect(route('admin.news.index'))
@@ -73,8 +75,7 @@ class ParseController extends Controller
         }
     }
 
-    private
-    function getCategoryId($categoryTitle)
+    private function getCategoryId($categoryTitle)
     {
         $category = Category::where('title', $categoryTitle)->get()->first();
         if (!$category) {

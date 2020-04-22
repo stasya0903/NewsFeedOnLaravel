@@ -30,6 +30,7 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         return response()->view('admin.news.create', [

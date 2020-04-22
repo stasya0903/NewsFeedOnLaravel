@@ -76,8 +76,10 @@ Route::group([
         });
         Route::resources([
             'news' => 'NewsController',
-            'category' => 'CategoryController'
+            'category' => 'CategoryController',
+            'resource'=>'ResourseController'
         ]);
+
         Route::group([
             'prefix' => 'users',
             'as' => 'users.'

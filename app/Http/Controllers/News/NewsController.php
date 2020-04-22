@@ -18,7 +18,8 @@ class NewsController extends Controller
     public function show(News $news){
         return view('news.one', [
             'news'=> $news,
-            'category'=> $news->category()->first()
+            'category'=> $news->category()->first(),
+            /*'resource'=> $news->resource()->first() */
         ]);
     }
 
