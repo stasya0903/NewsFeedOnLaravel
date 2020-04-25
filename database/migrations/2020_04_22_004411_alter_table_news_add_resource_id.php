@@ -13,13 +13,13 @@ class AlterTableNewsAddResourceId extends Migration
      */
     public function up()
     {
-       /* Schema::table('news', function (Blueprint $table) {
-            $table->unsignedBigInteger('recourse_id')->default('1');
-            $table->foreign('recourse_id')
+        Schema::table('news', function (Blueprint $table) {
+            $table->unsignedBigInteger('resource_id')->default('1');
+            $table->foreign('resource_id')
                 ->references('id')
                 ->on('resources')
                 ->onDelete('cascade');;
-        });*/
+        });
     }
 
     /**
@@ -30,8 +30,8 @@ class AlterTableNewsAddResourceId extends Migration
     public function down()
     {
         Schema::table('news', function (Blueprint $table) {
-            $table->dropforeign(['recourse_id']);
-            $table->dropColumn(['recourse_id']);
+            $table->dropforeign(['resource_id']);
+            $table->dropColumn(['resource_id']);
 
         });
     }

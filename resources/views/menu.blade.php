@@ -28,6 +28,7 @@
                                     статус пользователей</a>
                                 <a href="{{route('admin.news.export')}}" class="dropdown-item hoverYellow ">Выгрузить
                                     новости</a>
+                                <a href="{{route('admin.resource.index')}}" class="dropdown-item hoverYellow ">Редактировать Ресурсы</a>
                                 <a href="{{route('admin.parser')}}" class="dropdown-item hoverYellow ">Запарсить новости</a>
                             </div>
                         </li>

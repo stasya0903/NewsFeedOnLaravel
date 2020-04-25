@@ -7,8 +7,7 @@
 
 @section("content")
     <div class="container">
-
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mr-3 mb-5">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header pink-bg text-white text-center">{{ __('Добавить источник')  }}</div>
@@ -22,14 +21,16 @@
 
                                 <div class="col-md-6">
                                     <input id="title" type="text"
-                                           class="form-control @if($error){{'is-invalid'}}@endif"
+                                           class="form-control
+                                           @error('xmlSrc'){{'is-invalid'}}@enderror"
                                            name="xmlSrc"
+                                           value="{{old('xmlSrc')}}"
                                            placeholder="Введите валидный источник новостей">
-                                    @if($error)
+                                    @error('xmlSrc')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $error }}</strong>
+                                        <strong>{{ $message }}</strong>
                                     </span>
-                                    @endif
+                                    @enderror
 
                                 </div>
                             </div>
@@ -47,5 +48,42 @@
                 </div>
             </div>
         </div>
+        <table class="table table-striped mt-2">
+            <thead>
+            <tr>
+                <th>Название</th>
+                <th>Url</th>
+                <th>XML Url</th>
+                <th>Картинка</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            @forelse($resources as $item)
+                <tr>
+                    <form method="POST" action="{{route('admin.resource.destroy',$item)}}">
+                        @csrf
+                        @method("DELETE")
+                        <td><p><a href="{{route('admin.resource.show', $item)}}">{{ $item->title  }} </a></p></td>
+                        <td><p><a href="{{ $item->link  }} ">{{ $item->link  }}</a>  </p></td>
+                        <td><p><a href="{{ $item->xmlSrc  }}">{{ $item->xmlSrc  }}</a>  </p>
+                        </td>
+                        <td>
+                            <img src="{{$item->image}}" alt="" class="img-thumbnail bg-transparent border-0">
+                        </td>
+                        <td><input type="submit" value="Удалить"></td>
+
+                    </form>
+                </tr>
+
+            @empty
+                <tr>
+                    <td>Нет Ресурсов</td>
+                </tr>
+            @endforelse
+
+            </tbody>
+        </table>
+
     </div>
 @endsection

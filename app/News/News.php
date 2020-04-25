@@ -22,7 +22,7 @@ class News extends Model
     }
 
     public function resource (){
-        return  $this->belongsTo(Resource::class, 'category_id');
+        return  $this->belongsTo(Resource::class, 'resource_id');
     }
     public static function  rules(){
         $tableNameCategory = (new Category())->getTable();

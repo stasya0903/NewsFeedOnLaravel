@@ -11,15 +11,7 @@ use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class ParseController extends Controller
 {
-    /** TODO создать отдельную таблицу для источников, добавление id источника, CRUD источника  */
-    protected $sourses = [
-        ['name' => 'lenta',
-            'url' => 'http://img.lenta.ru/r/EX/import.rss',],
-        ['name' => 'rumbler',
-            'url' => 'https://www.vedomosti.ru/rss/issue'],
-        ['name' => 'ej',
-            'url' => 'http://www.ej.by/news/news.rss']
-    ];
+
 
     public
     function index()
@@ -76,18 +68,10 @@ class ParseController extends Controller
     private
     function getCategoryId($categoryTitle)
     {
-        $category = Category::where('title', $categoryTitle)->get()->first();
-        if (!$category) {
-            $category = Category::create([
+        $category = Category::firstOrCreate([
                 'title' => $categoryTitle,
                 'slug' => str_replace(' ', '_', $categoryTitle)
             ]);
-            if (!$category->save()) {
-                $category->id = 1;
-            };
-        }
-
         return $category->id;
-
     }
 }

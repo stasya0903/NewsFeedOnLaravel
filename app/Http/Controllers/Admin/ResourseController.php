@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\News\News;
 use App\Resource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Orchestra\Parser\Xml\Facade as XmlParser;
-use XMLReader;
+
 
 class ResourseController extends Controller
 {
@@ -17,69 +18,82 @@ class ResourseController extends Controller
      */
     public function index()
     {
-        //
+        return response()->view('admin.resource.index', [
+            'resources' => Resource::all()
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function show(Resource $resource)
     {
-        return response()->view('admin.resource.create',[
-        'error' => null
+        return response()->view('admin.resource.show', [
+            'resource' => $resource,
+            'news'=> $resource->news()
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
-        /**TODO  валидация что передается url, проверка что такого ресурса уже нет**/
     {
-        $xmlSrc = $request->get('xmlSrc');
-
-        if($this->validateXmlSrc($xmlSrc )){
-            $xml = XmlParser::load($xmlSrc);
-            $data = $xml->parse([
-                'title' => ['uses' => 'channel.title'],
-                'link' => ['uses' => 'channel.link'],
-                'image' => ['uses' => 'channel.image.url'],
-            ]);
-            $data['xmlSrc'] = $xmlSrc;
-
+        $this->isDataValid($request);
+        try {
+            $xmlSrc = $request->get('xmlSrc');
+            $data = $this->parseData($xmlSrc);
             $resource = Resource::create($data);
-            if ($resource){
-                return response()->view('admin.resource.create',[
-                    'error' => 'Ресурс удачно добавлен'
-                ]);
+            if ($resource) {
+                return redirect(route('admin.resource.index'))->with(
+                    'success', 'Ресурс удачно добавлен'
+                );
             }
-        }else{
-            return response()->view('admin.resource.create',[
-                'error' => 'Данный источник не является валидным xml источником'
-            ]);
-
+        } catch (\Exception $e) {
+            $request->flash();
+            return redirect(route('admin.resource.index'))->with(
+                'error', 'Данный источник не является валидным xml источником'
+            );
         }
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Resourse  $resourse
-     * @return \Illuminate\Http\Response
+     * @param \App\Resource $resourse
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy(Resourse $resourse)
+    public function destroy( Resource $resource)
     {
-        //
+        $result = $resource->delete();
+        if ($result) {
+            return redirect(route('admin.resource.index'))->with("success", 'Ресурс успешно удалена');
+        } else {
+            return redirect(route('admin.resource.index'))->with("error", 'Ошибка сервера');
+        }
     }
 
-    public function validateXmlSrc($src){
-        $xmlReader = new XMLReader;
-        $xmlReader->xml($src);
-        return $xmlReader->isValid();
+    public function isDataValid($request)
+    {
+        return $this->validate($request,
+            Resource::rules(),
+            Resource::instructions(),
+            []
+        );
+    }
+
+    public function parseData($xmlSrc)
+    {
+        $xml = XmlParser::load($xmlSrc);
+        $data = $xml->parse([
+            'title' => ['uses' => 'channel.title'],
+            'link' => ['uses' => 'channel.link'],
+            'image' => ['uses' => 'channel.image.url'],
+        ]);
+        $data['xmlSrc'] = $xmlSrc;
+
+        return $data;
     }
 }

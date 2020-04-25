@@ -99,7 +99,9 @@ class NewsController extends Controller
      *
      * @param \App\News\News $news
      * @return \Illuminate\Http\Response
+     * TODO remove try/catch
      */
+
     public function destroy(News $news)
     {
         try {
