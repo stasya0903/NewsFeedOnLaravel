@@ -13,7 +13,7 @@
                 <div class="card">
                     <div class="card-header pink-bg text-white text-center">@if(!$news->id){{ __('Добавить новость') }} @else {{ __('Обновить новость') }} @endif</div>
 
-                    <div class="card-body">
+                    <div class="card    -body">
                         <form enctype="multipart/form-data" method="POST" action="@if(!$news->id){{ route('admin.news.store') }}@else{{ route('admin.news.update', $news) }}@endif">
                             @csrf
                             @if($news->id) @method('PUT') @endif
@@ -62,6 +62,7 @@
                                     <textarea id="title" type="text"
                                               class="form-control @error('text') is-invalid @enderror"
                                               name="text"
+                                              id="summary-ckeditor"
                                               >{{ old('text') ?? $news->text }}</textarea>
                                     @error('text')
                                     <span class="invalid-feedback" role="alert">
@@ -130,4 +131,13 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+    <script> var options = {
+            filebrowserImageBrowseUrl: '/filemanager?type=Images',
+            filebrowserImageUploadUrl: '/filemanager/upload?type=Images&_token={{ csrf_token() }}',
+            filebrowserBrowseUrl: '/filemanager?type=Files',
+            filebrowserUploadUrl: '/filemanager/upload?type=Files&_token={{ csrf_token() }}'
+        };
+        CKEDITOR.replace( 'text', options );
+    </script>
 @endsection

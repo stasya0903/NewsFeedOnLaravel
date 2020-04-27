@@ -49826,14 +49826,15 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/assets/sass/font-awesome.scss ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /Users/Alena/code/laravel/newsFeedOnLaravel/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/Alena/code/laravel/newsFeedOnLaravel/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/Alena/code/laravel/newsFeedOnLaravel/resources/sass/app.scss */"./resources/sass/app.scss");
+!(function webpackMissingModule() { var e = new Error("Cannot find module '/Users/Alena/code/laravel/newsFeedOnLaravel/resources/assets/sass/font-awesome.scss'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 /***/ })

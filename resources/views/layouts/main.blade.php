@@ -13,6 +13,18 @@
     <!-- Styles -->
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link href="{{ asset('css/open-iconic-bootstrap.min.css') }}" rel="stylesheet" >
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/aos.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/icomoon.css') }}">
+    <link  href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 
 <body class="d-flex flex-column h-100" data-gr-c-s-loaded="true">
