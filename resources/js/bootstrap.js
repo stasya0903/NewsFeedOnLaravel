@@ -11,7 +11,8 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
-} catch (e) {}
+} catch (e) {
+}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -29,13 +30,37 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * allows your team to easily build robust real-time web applications.
  */
 
-// import Echo from 'laravel-echo';
+/*import Echo from 'laravel-echo';
 
-// window.Pusher = require('pusher-js');
+window.Pusher = require('pusher-js');
+Pusher.logToConsole = true;
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     encrypted: true
-// });
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: process.env.MIX_PUSHER_APP_KEY,
+    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+    encrypted: false
+});*/
+
+import Echo from "laravel-echo";
+
+window.Pusher = require('pusher-js');
+Pusher.logToConsole = true;
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: '21309cdba558c65591e5',
+    cluster: 'eu',
+    forceTLS: true
+});
+/*window.Echo.channel("workers-progress").listen(".job-number-updated", e => {
+    console.log('finally');
+    /!*const result = await fetch(args.api);
+    const data = await result.json();
+    /!*this.$store.commit("ADD_TODO", e.task);
+    this.newTodo.title = "";*!/!*!/
+});*/
+/*let channel = Echo.channel('workers-progress');
+channel.listen('.job-number-updated', function(data) {
+    alert(JSON.stringify(data));
+});*/

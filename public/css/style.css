@@ -4878,7 +4878,7 @@ a.close.disabled {
   .bs-popover-top .arrow::before, .bs-popover-auto[x-placement^="top"] .arrow::before {
     bottom: 0;
     border-top-color: rgba(0, 0, 0, 0.25); }
-  
+
   .bs-popover-top .arrow::after,
   .bs-popover-auto[x-placement^="top"] .arrow::after {
     bottom: 1px;
@@ -4898,7 +4898,7 @@ a.close.disabled {
   .bs-popover-right .arrow::before, .bs-popover-auto[x-placement^="right"] .arrow::before {
     left: 0;
     border-right-color: rgba(0, 0, 0, 0.25); }
-  
+
   .bs-popover-right .arrow::after,
   .bs-popover-auto[x-placement^="right"] .arrow::after {
     left: 1px;
@@ -4915,7 +4915,7 @@ a.close.disabled {
   .bs-popover-bottom .arrow::before, .bs-popover-auto[x-placement^="bottom"] .arrow::before {
     top: 0;
     border-bottom-color: rgba(0, 0, 0, 0.25); }
-  
+
   .bs-popover-bottom .arrow::after,
   .bs-popover-auto[x-placement^="bottom"] .arrow::after {
     top: 1px;
@@ -4944,7 +4944,7 @@ a.close.disabled {
   .bs-popover-left .arrow::before, .bs-popover-auto[x-placement^="left"] .arrow::before {
     right: 0;
     border-left-color: rgba(0, 0, 0, 0.25); }
-  
+
   .bs-popover-left .arrow::after,
   .bs-popover-auto[x-placement^="left"] .arrow::after {
     right: 1px;
@@ -7995,7 +7995,7 @@ a.text-dark:hover, a.text-dark:focus {
     border-color: #dee2e6; } }
 
 body {
-  font-family: "Poppins", Arial, sans-serif;
+  font-family: "Nunito", Arial, sans-serif;
   background: #fff;
   font-size: 16px;
   line-height: 1.8;
@@ -8193,7 +8193,7 @@ h1, h2, h3, h4, h5,
 .navbar-brand {
   font-weight: 900;
   font-size: 26px;
-  font-family: "Poppins", Arial, sans-serif;
+  font-family: "Nunito", Arial, sans-serif;
   line-height: 1; }
   .navbar-brand i {
     font-style: normal;
@@ -8238,7 +8238,7 @@ h1, h2, h3, h4, h5,
   color: #fff;
   line-height: 1.2;
   font-weight: 700;
-  font-family: "Poppins", Arial, sans-serif; }
+  font-family: "Nunito", Arial, sans-serif; }
   @media (max-width: 1199.98px) {
     .slider-text h1 {
       font-size: 14vw; } }
@@ -8248,7 +8248,7 @@ h1, h2, h3, h4, h5,
 .slider-text .subheading {
   font-size: 18px;
   color: white;
-  font-family: "Poppins", Arial, sans-serif;
+  font-family: "Nunito", Arial, sans-serif;
   font-weight: 400;
   margin-bottom: 0; }
 
@@ -8898,13 +8898,13 @@ textarea.form-control {
     .blog-entry .text .topper {
       margin-top: -61px;
       position: absolute;
-      top: 0;
-      left: 20px;
+      top: 4px;
+      left: 0;
       background: #ffd369; }
       .blog-entry .text .topper:after {
         position: absolute;
         bottom: -10px;
-        left: 40px;
+        left: 0;
         content: '';
         width: 0;
         height: 0;
@@ -8929,7 +8929,7 @@ textarea.form-control {
   .blog-entry .two {
     width: calc(100% - 70px); }
   .blog-entry span.day {
-    font-size: 44px;
+    font-size: 39px;
     font-weight: 300;
     color: #000000;
     line-height: 1; }
@@ -9253,3 +9253,8 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+
+.fontSize30{
+    font-size: 30px!important;
+}

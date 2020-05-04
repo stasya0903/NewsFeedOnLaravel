@@ -9,12 +9,14 @@
     <div class="container">
 
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header pink-bg text-white text-center">@if(!$news->id){{ __('Добавить новость') }} @else {{ __('Обновить новость') }} @endif</div>
 
-                    <div class="card    -body">
-                        <form enctype="multipart/form-data" method="POST" action="@if(!$news->id){{ route('admin.news.store') }}@else{{ route('admin.news.update', $news) }}@endif">
+                    <div class="card-body">
+                        <form enctype="multipart/form-data"
+                              method="POST"
+                              action="@if(!$news->id){{ route('admin.news.store') }}@else{{ route('admin.news.update', $news) }}@endif">
                             @csrf
                             @if($news->id) @method('PUT') @endif
                             <div class="form-group row">
@@ -56,9 +58,9 @@
 
                             <div class="form-group row">
                                 <label for="text"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Текст новости') }}</label>
+                                       class="col-md-12 col-form-label text-md-center">{{ __('Текст новости') }}</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <textarea id="title" type="text"
                                               class="form-control @error('text') is-invalid @enderror"
                                               name="text"

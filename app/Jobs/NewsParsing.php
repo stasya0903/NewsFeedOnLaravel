@@ -2,26 +2,30 @@
 
 namespace App\Jobs;
 
+use App\Events\EventJobAdded;
 use App\Services\XmlParserService;
 use Illuminate\Bus\Queueable;
+use Illuminate\Queue\Jobs\Job;
+use Illuminate\Queue\RedisQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Queue;
 
 class NewsParsing implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    private $link;
+    private $resource;
 
     /**
      * Create a new job instance.
      *
-     * @param $link
+     * @param $resource
      */
-    public function __construct($link)
+    public function __construct($resource)
     {
-         $this->link = $link;
+         $this->resource = $resource;
     }
 
     /**
@@ -32,6 +36,7 @@ class NewsParsing implements ShouldQueue
      */
     public function handle(XmlParserService $parserService)
     {
-        $parserService->saveNews($this->link);
+        broadcast(new EventJobAdded(Queue::size('parsing')));
+         $parserService->saveNews($this->resource);
     }
 }

@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/getQSize', function () {
+    return response()->json(['status'=>'ok', 'size' => Queue::size('default')], JSON_UNESCAPED_UNICODE);
+})->middleware('api');

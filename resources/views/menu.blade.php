@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain"
@@ -7,10 +7,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarMain">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item {{ request()->routeIs('Home')?'active':'' }}"><a
-                        href="{{ route('Home') }}" class="nav-link">Главная</a></li>
-
-
                 @auth()
                     @if(Auth::user()->isAdmin())
                         <li class="nav-item dropdown"><a class='nav-link dropdown-toggle'
@@ -35,12 +31,15 @@
                         <li class="nav-item {{ request()->routeIs('admin.index')?'active':'' }}">
                             <a href="{{route('admin.index')}}" class="nav-link">Главная</a>
                         </li>
+                        @else
+                        <li class="nav-item {{ request()->routeIs('Home')?'active':'' }}"><a
+                                href="{{ route('Home') }}" class="nav-link">Главная</a></li>
                     @endif
                 @endauth
                 <li class="nav-item {{ request()->routeIs('news.index')?'active':'' }}"><a
-                        href="{{ route('news.index') }}" class="nav-link">News</a></li>
+                        href="{{ route('news.index') }}" class="nav-link">Новости</a></li>
                 <li class="nav-item {{ request()->routeIs('news.categories.index')?'active':'' }}"><a
-                        href="{{ route('news.categories.index') }}" class="nav-link">Categories</a></li>
+                        href="{{ route('news.categories.index') }}" class="nav-link">По Категориям</a></li>
             </ul>
         </div>
     </div>

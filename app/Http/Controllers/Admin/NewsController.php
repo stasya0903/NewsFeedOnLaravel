@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use Queue;
 
 class NewsController extends Controller
 {
@@ -19,6 +20,7 @@ class NewsController extends Controller
      */
     public function index()
     {
+        /*$parserJobs = dd(Queue::size('default'));*/
         return response()->view('admin.news.edit', [
             'news' => News::query()->orderByDesc('created_at')->paginate(7),
             'categories' => Category::all(),

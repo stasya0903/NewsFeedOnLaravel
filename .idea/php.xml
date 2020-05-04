@@ -120,6 +120,10 @@
       <path value="$PROJECT_DIR$/vendor/unisharp/laravel-filemanager" />
       <path value="$PROJECT_DIR$/vendor/unisharp/laravel-ckeditor" />
       <path value="$PROJECT_DIR$/vendor/laravel/helpers" />
+      <path value="$PROJECT_DIR$/vendor/imtigger/laravel-job-status" />
+      <path value="$PROJECT_DIR$/vendor/imtigger/laravel-job-status-progress-view" />
+      <path value="$PROJECT_DIR$/vendor/pusher/pusher-php-server" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/sodium_compat" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />

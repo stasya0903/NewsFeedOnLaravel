@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\EventJobAdded;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Broadcast;
+use Queue;
 
 class BroadcastServiceProvider extends ServiceProvider
 {
@@ -17,5 +19,8 @@ class BroadcastServiceProvider extends ServiceProvider
         Broadcast::routes();
 
         require base_path('routes/channels.php');
+
     }
+
+
 }

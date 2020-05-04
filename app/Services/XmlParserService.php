@@ -4,22 +4,35 @@
 namespace App\Services;
 
 
+use App\Events\EventJobAdded;
 use App\News\Category;
 use App\News\News;
+use Illuminate\Queue\Events\JobProcessed;
+use Illuminate\Queue\Events\JobProcessing;
+use Illuminate\Support\Facades\Log;
+use Queue;
 use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class XmlParserService
 {
 
-    public function saveNews($link)
+    public function saveNews($resource)
     {
-        $this->pushToDb($this->getData($link));
+        $this->pushToDb($this->getData($resource->xmlSrc), $resource->id);
+        /*if($result){
+            broadcast(new EventJobAdded(Queue::size('parsing')));
+            EventJobAdded::broadcast(Queue::size('parsing'));
+
+            Log::info(Queue::size('parsing'));
+
+        }*/
+
     }
 
     public function getData($source)
     {
         $xml = XmlParser::load($source);
-        /* dd($xml);*/
+        /*dd($xml);*/
         $data = $xml->parse([
             'news' => ['uses' => 'channel.item[guid,title,link,description,pubDate,enclosure::url,category]']
         ]);
@@ -30,7 +43,7 @@ class XmlParserService
         return $data['news'];
     }
 
-    public function pushToDb($data)
+    public function pushToDb($data, $resource_id)
     {
         foreach ($data as $items => $item) {
             $newsWithSameTitle = News::where('title', $item['title'])->get()->first();
@@ -43,11 +56,14 @@ class XmlParserService
                     'category_id' => $this->getCategoryId($item['category']),
                     'image' => $item['enclosure::url'],
                     'guid' => $item['guid'],
+                    'resource_id' => $resource_id
                 ]);
+
                 if (!$news->save()) {
                     return redirect(route('admin.news.index'))
                         ->with("error", 'Ошибка добавления данных');
                 }
+                session()->flash('success', Queue::size('parsing'));
 
             }
         }
@@ -61,4 +77,5 @@ class XmlParserService
         ]);
         return $category->id;
     }
+
 }

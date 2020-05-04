@@ -28,4 +28,16 @@ class LoginController extends Controller
         return redirect()->route('Home');
 
     }
+
+    public function responseGH(Adaptor $userAdaptor)
+    {
+        if (Auth::check()) {
+            return redirect()->route('Home');
+        }
+        $user = Socialite::driver('vkontakte')->user();
+        $userInSystem = $userAdaptor->getUserBySocId($user, 'vk');
+        Auth::login($userInSystem);
+        return redirect()->route('Home');
+
+    }
 }

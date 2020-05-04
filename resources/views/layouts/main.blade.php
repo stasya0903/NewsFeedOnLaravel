@@ -25,6 +25,12 @@
     <link rel="stylesheet" href="{{ asset('css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('css/icomoon.css') }}">
     <link  href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.css') }}">
 </head>
 
 <body class="d-flex flex-column h-100" data-gr-c-s-loaded="true">

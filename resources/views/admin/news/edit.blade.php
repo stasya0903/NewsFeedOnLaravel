@@ -9,10 +9,6 @@
 @endsection
 
 @section('content')
-    <div id="app">
-
-    </div>
-
     <div class="container">
 
         @if ($errors->count() > 0)
@@ -65,18 +61,22 @@
                                 </select>
                             </td>
 
-                            <td>
-                                <button type="submit"> Сохранить</button>
+                            <td class="text-center">
+                                <button class="bg-transparent border-0" type="submit" >
+                                    <span class="icon-update fontSize30"></span></button>
                             </td>
 
-                            <td><a href="{{route('admin.news.edit', $item->id) }}"> Подробнее</a></td>
+                            <td class="text-center">
+                                <a href="{{route('admin.news.edit', $item->id) }}">
+                                <span class="icon-edit text-dark fontSize30"></span></a>
+                            </td>
                         </form>
-                        <td class="align-items-center">
+                        <td class="align-items-center text-center">
                             <form method="POST" action="{{route('admin.news.destroy',$item)}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="bg-transparent">
-                                    <span aria-hidden="true">&times;</span>
+                                <button type="submit" class="bg-transparent border-0">
+                                    <span class="icon-delete fontSize30"></span>
                                 </button>
                             </form>
                         </td>
@@ -89,7 +89,13 @@
                 </tbody>
             </table>
 
-            <div> {{ $news->links() }}</div>
+            <div class="row mt-5">
+                <div class="col text-center">
+                    <div class="block-27">
+                        {{$news->links("pagination::default")}}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

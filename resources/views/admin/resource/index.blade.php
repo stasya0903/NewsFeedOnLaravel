@@ -7,8 +7,8 @@
 
 @section("content")
     <div class="container">
-        <div class="row justify-content-center mr-3 mb-5">
-            <div class="col-md-8">
+        <div class="row justify-content-lg-around mr-3 mb-5">
+            <div class="col-md-7">
                 <div class="card">
                     <div class="card-header pink-bg text-white text-center">{{ __('Добавить источник')  }}</div>
 
@@ -44,6 +44,23 @@
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div id="app">
+                    <div class="card">
+                        <div class="card-header pink-bg text-white text-center">{{ __('Загрузить новости')  }}</div>
+                        <div class="card-body">
+
+                                <a href="{{route('admin.parser')}}"
+                                    class="btn btn-outline-secondary pink-bgHover">
+                                    {{ __('Запарсить новости со всех источников') }}
+                                </a>
+
+                            <example-component :total-steps="{{session('totalSteps') ?? 0}}"></example-component>
+                        </div>
                     </div>
                 </div>
             </div>
