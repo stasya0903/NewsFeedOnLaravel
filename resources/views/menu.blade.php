@@ -19,6 +19,8 @@
                                     новость</a>
                                 <a href="{{route('admin.news.index')}}" class="dropdown-item hoverYellow ">Редактировать
                                     новости</a>
+                                <a href="{{route('admin.category.index')}}" class="dropdown-item hoverYellow ">Редактировать
+                                    категории</a>
 
                                 <a href="{{route('admin.users.edit')}}" class="dropdown-item hoverYellow ">Редактировать
                                     статус пользователей</a>

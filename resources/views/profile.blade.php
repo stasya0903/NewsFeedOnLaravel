@@ -20,7 +20,8 @@
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                            class="form-control @error('name') is-invalid @enderror" name="name"
-                                           value="{{ old('name') ?? $user->name }}" required autocomplete="name" autofocus>
+                                           value="{{ old('name') ?? $user->name }}" required autocomplete="name"
+                                           autofocus>
 
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -86,11 +87,22 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-sm btn-outline-secondary pink-bgHover">
+
+                            <div class="form-group row mb-9">
+                                <div class="col-md-12 offset-md-4">
+                                    <button type="submit" class="btn btn-lg btn-outline-secondary pink-bgHover">
                                         {{ __('Изменить') }}
                                     </button>
+
+                                </div>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    @if (Route::has('password.request'))
+                                        <a class="btn btn-link hoverYellow grey" href="{{ route('password.request') }}">
+                                            {{ __('Forgot Your Password or Logged in with Social media?') }}
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         </form>

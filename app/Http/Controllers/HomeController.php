@@ -17,22 +17,28 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        $news = News::orderByRaw("RAND()")->where('image', '<>',  null )->latest()->first();
+        $news = News::orderByRaw("RAND()")
+            ->where('image', '<>', null)
+            ->latest()
+            ->first();
         $hoursDifference = 0;
         $category = null;
-        if($news){
-            $now = new Carbon(now());
-            $created = new Carbon ($news->created_at);
-            $hoursDifference = $now->diffInHours($created);
-            $category= $news->category()->first();
 
+        if ($news) {
+            $hoursDifference = $this->getHoursDifference($news);
+            $category = $news->category()->first();
         }
         return view('index', [
-            'news'=>$news,
-            'category'=> $category ,
-            'hoursAgo'=> $hoursDifference
+            'news' => $news,
+            'category' => $category,
+            'hoursAgo' => $hoursDifference
         ]);
+    }
 
+    private function getHoursDifference($news)
+    {
+        $now = new Carbon(now());
+        $created = new Carbon ($news->created_at);
+        return $now->diffInHours($created);
     }
 }

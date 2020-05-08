@@ -14,8 +14,8 @@ use App\News\Category;
 */
 
 Route::get('/', 'HomeController@index')->name('Home');
-Route::get('/auth/vk', 'LoginController@loginVK')->name('vkLogin');
-Route::get('/auth/vk/response', 'LoginController@responseVK')->name('vkResponse');
+Route::get('/auth/{socialNetwork}', 'LoginController@login')->name('loginSocial');
+Route::get('/auth/{socialNetwork}/response', 'LoginController@response')->name('responseSocial');
 Route::group([
     'prefix' => 'profile',
     'as' => 'profile.',

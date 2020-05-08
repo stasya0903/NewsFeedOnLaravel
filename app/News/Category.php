@@ -19,8 +19,8 @@ class Category extends Model
     }
     public static function  rules(){
         return[
-            'title' => 'required|min:5|max:20',
-            'slug'=> 'required|min:3|max:40|alpha',
+            'title' => 'required|min:2|max:20',
+            'slug'=> 'required|min:2|max:40|alpha',
         ];
     }
     public static function attributeNames(){

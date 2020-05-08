@@ -56,10 +56,10 @@
                         <div class="d-flex form-group row">
                             <div class="col-md-6 offset-md-4">
                             <ul class="media-social list-unstyled d-flex">
-                                <li class="socialMediaIcon"><a class="socialMediaIconLink" href="#"><span class="icon-twitter"></span></a></li>
-                                <li class="socialMediaIcon"><a class="socialMediaIconLink" href="#"><span class="icon-facebook"></span></a></li>
-                                <li class="socialMediaIcon"><a class="socialMediaIconLink" href="#"><span class="icon-instagram"></span></a></li>
-                                <li class="socialMediaIcon"><a class="socialMediaIconLink" href="{{ route('vkLogin') }}"><span class="fab fa-vk"></span></a></li>
+                                <li class="socialMediaIcon"><a class="socialMediaIconLink" href="{{ route('loginSocial', 'github') }}"><span class="fab fa-github"></span></a></li>
+                               {{-- <li class="socialMediaIcon"><a class="socialMediaIconLink" href="#"><span class="icon-facebook"></span></a></li>--}}
+                                <li class="socialMediaIcon"><a class="socialMediaIconLink" href="{{ route('loginSocial', 'instagram') }}"><span class="icon-instagram"></span></a></li>
+                                <li class="socialMediaIcon"><a class="socialMediaIconLink" href="{{ route('loginSocial', 'vkontakte') }}"><span class="fab fa-vk"></span></a></li>
                             </ul>
                             </div>
                         </div>

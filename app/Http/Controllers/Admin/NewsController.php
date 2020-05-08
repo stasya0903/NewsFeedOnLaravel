@@ -20,7 +20,6 @@ class NewsController extends Controller
      */
     public function index()
     {
-        /*$parserJobs = dd(Queue::size('default'));*/
         return response()->view('admin.news.edit', [
             'news' => News::query()->orderByDesc('created_at')->paginate(7),
             'categories' => Category::all(),
@@ -45,7 +44,7 @@ class NewsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
@@ -100,7 +99,7 @@ class NewsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \App\News\News $news
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      * TODO remove try/catch
      */
 

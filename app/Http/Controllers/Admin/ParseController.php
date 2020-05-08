@@ -21,7 +21,6 @@ class ParseController extends Controller
         foreach (Resource::all() as $resource) {
             NewsParsing::dispatch($resource)->onQueue('parsing');
             EventJobsSendToParse::broadcast(Queue::size('parsing'));
-
         }
 
         return redirect(route('admin.resource.index'))->with('totalSteps', Queue::size('parsing'));
