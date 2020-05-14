@@ -24,21 +24,21 @@ class CategoryController extends Controller
         ]);
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
         $rules = Category::rules();
         $rules['slug'] = $rules['slug'] . '|unique:categories,slug';
-        $validatedData = $this->validate($request,
-            Category::rules(),
-            [],
-            Category::attributeNames());
+        $validatedData = $this->validate(   $request,
+                                            Category::rules(),
+                                            [],
+                                            Category::attributeNames());
         $result = Category::create($validatedData);
         if ($result) {
             return redirect(route('admin.category.index'))->with("success", 'Категория успешно добавлена');
@@ -46,31 +46,7 @@ class CategoryController extends Controller
             $request->flash();
             return redirect(route('admin.category.index'))->with("error", 'Ошибка сервера');
         }
-
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\News\Category $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\News\Category $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
-    {
-        //
-    }
-
     /**
      * Update the specified resource in storage.
      *

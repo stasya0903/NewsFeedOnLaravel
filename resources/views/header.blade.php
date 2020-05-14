@@ -1,13 +1,12 @@
 <header class="blog-header py-3 container-fluid">
     <div class="row flex-nowrap justify-content-between align-items-center ml-3 mr-3">
         <form class=" d-flex justify-content-center md-form form-sm mt-0">
-            <i class="fas fa-search" aria-hidden="true"></i>
+            <i class="line-height-3 fas fa-search" aria-hidden="true"></i>
             <input class="bg-transparent form-control form-control-sm ml-3 w-75 form-underline" type="text"
-                   placeholder="Search"
                    aria-label="Search">
         </form>
         <div class="col-4 text-center">
-            <h2 class="logo"><a href="{{route('Home')  }}">New<span>s</span></a></h2>
+            <h2 class=""><a class="navbar-brand" href="{{route('Home')  }}">New<span>s</span></a></h2>
         </div>
 
         <div class="col-2 d-flex justify-content-sm-between align-items-center">

@@ -14,6 +14,8 @@ use App\News\Category;
 */
 
 Route::get('/', 'HomeController@index')->name('Home');
+Route::get('/auth/{socialNetwork}', 'LoginController@login')->name('loginSocial');
+Route::get('/auth/{socialNetwork}/response', 'LoginController@response')->name('responseSocial');
 Route::group([
     'prefix' => 'profile',
     'as' => 'profile.',
@@ -64,6 +66,7 @@ Route::group([
 ],
     function () {
         Route::get('/index', 'IndexController@index')->name('index');
+        Route::get('/parser', 'ParseController@index')->name('parser');
         Route::group([
             'prefix' => 'news',
             'as' => 'news.'
@@ -73,8 +76,10 @@ Route::group([
         });
         Route::resources([
             'news' => 'NewsController',
-            'category' => 'CategoryController'
+            'category' => 'CategoryController',
+            'resource'=>'ResourseController'
         ]);
+
         Route::group([
             'prefix' => 'users',
             'as' => 'users.'

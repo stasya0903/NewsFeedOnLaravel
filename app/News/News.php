@@ -2,6 +2,7 @@
 
 namespace App\News;
 
+use App\Resource;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -14,10 +15,14 @@ use Illuminate\Support\Facades\Storage;
 class News extends Model
 {
 
-    protected $fillable = ['title','text', 'image', 'isPrivate', 'category_id'];
+    protected $fillable = ['title','text', 'image', 'isPrivate', 'category_id', 'guid', 'resource_id'];
 
     public function category (){
         return  $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function resource (){
+        return  $this->belongsTo(Resource::class, 'resource_id');
     }
     public static function  rules(){
         $tableNameCategory = (new Category())->getTable();

@@ -1,7 +1,7 @@
 @import "style";
 
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Nunito::300,400,500,600,700,800,900');
 @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900');
 
 // Variables
@@ -11,6 +11,9 @@
 @import '~bootstrap/scss/bootstrap';
 
 // Font Awesome
-@import "node_modules/font-awesome/scss/font-awesome";
+@import '~@fortawesome/fontawesome-free/scss/brands';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
 
