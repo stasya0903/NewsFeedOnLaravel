@@ -7,6 +7,7 @@ use App\News\News;
 use App\News\NewsExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use Queue;
@@ -36,7 +37,7 @@ class NewsController extends Controller
     {
         return response()->view('admin.news.create', [
             'categories' => Category::all(),
-            'news'=> new News()
+            'news' => new News()
         ]);
     }
 
@@ -105,14 +106,35 @@ class NewsController extends Controller
 
     public function destroy(News $news)
     {
-        try {
-            $news->delete();
+        if ($news->delete()) {
             return redirect()->route('admin.news.index')->with("success", 'Новость успешно удалена');
-        } catch (\Exception $e) {
-            return redirect()->route('admin.news.index')->with("success", 'Ошибка сервера');
-
         }
+
+        return redirect()->route('admin.news.index')->with("success", 'Ошибка сервера');
+
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \App\News\News $news
+     * @param $time
+     * @return \Illuminate\Http\RedirectResponse
+     */
+
+    public function destroyNewsByTime($daysAgo)
+    {
+        $now = Date::now();
+        $time = $now + $daysAgo;
+        $result = News::query()->where('created_at', '>', $time)->delete();
+
+        return redirect()->route('admin.news.index')->with("success", 'Новости успешно удалены');
+
+           /* return redirect()->route('admin.news.index')->with("success", 'Ошибка сервера');*/
+
+
+    }
+
 
     /**
      * Save the file with image in the storage.
@@ -131,7 +153,7 @@ class NewsController extends Controller
     }
 
     /**
-     * show the page to upload news in two the files
+     * show the page to upload news in to the files
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 
