@@ -52,7 +52,7 @@ return [
             'username' => env('DB_USERNAME', 'newsonlaravel'),
             'password' => env('DB_PASSWORD', '12345678'),
             'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8',
+            'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
             'prefix_indexes' => true,

@@ -17,7 +17,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $news = News::orderByRaw("RAND()")
+        $news = News::query()
             ->where('image', '<>', null)
             ->latest()
             ->first();
