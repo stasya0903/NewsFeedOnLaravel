@@ -8,7 +8,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Resource::class, function (Faker $faker) {
 
-     return [
-     ];
+     return [ ];
 });
 
