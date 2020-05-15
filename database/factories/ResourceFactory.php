@@ -6,7 +6,7 @@ use App\Resource;
 use Faker\Generator as Faker;
 
 
-$factory->define(Resource::class, function (Faker $faker) {
+$factory->define(Resource::class, function () {
 
      return [ ];
 });
