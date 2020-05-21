@@ -22,7 +22,7 @@ class NewsController extends Controller
     public function show(News $news)
     {
         $newsToPromote =  News::where('category_id', $news->category_id)
-            ->orderByRaw("RAND()")
+            ->inRandomOrder()
             ->take(3)
             ->get();
         $categoryToOffer = Category::all()->take(6);
