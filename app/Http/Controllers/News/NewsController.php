@@ -13,7 +13,7 @@ class NewsController extends Controller
     {
         return view('news.index', [
             'news' => News::query()
-                ->orderByRaw("RAND()")
+                ->inRandomOrder()
                 ->paginate(6),
             'categories' => Category::all()->keyBy('id'),
         ]);
