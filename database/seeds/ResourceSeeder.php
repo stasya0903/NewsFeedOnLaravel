@@ -15,18 +15,6 @@ class ResourceSeeder extends Seeder
         'http://img.lenta.ru/r/EX/import.rss',
         'https://www.vedomosti.ru/rss/issue',
         'http://www.ej.by/news/news.rss',
-        /*'http://img.lenta.ru/r/EX/import.rss',
-        'https://www.vedomosti.ru/rss/issue',
-        'http://www.ej.by/news/news.rss',
-        'http://img.lenta.ru/r/EX/import.rss',
-        'https://www.vedomosti.ru/rss/issue',
-        'http://www.ej.by/news/news.rss',
-        'http://img.lenta.ru/r/EX/import.rss',
-        'https://www.vedomosti.ru/rss/issue',
-        'http://www.ej.by/news/news.rss',
-        'http://img.lenta.ru/r/EX/import.rss',
-        'https://www.vedomosti.ru/rss/issue',
-        'http://www.ej.by/news/news.rss',*/
 
     ];
 
