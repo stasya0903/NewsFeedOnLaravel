@@ -124,7 +124,6 @@ class NewsController extends Controller
     {
         $now = Date::now();
         $time = $now->subDays($daysAgo);
-        dd($time->toDateString());
         $result = News::query()->where('created_at', '<', $time->toDateString())
                                 ->delete();
         if($result){
