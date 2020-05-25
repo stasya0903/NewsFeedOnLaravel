@@ -124,7 +124,9 @@ class NewsController extends Controller
     {
         $now = Date::now();
         $time = $now->subDays($daysAgo);
-        $result = News::query()->where('created_at', '>', $time)->delete();
+        dd($time);
+        $result = News::query()->where('created_at', '>', $time)
+                                ->delete();
         if($result){
             return redirect()->route('admin.resource.index')->with("success", 'Новости успешно удалены');
         }
