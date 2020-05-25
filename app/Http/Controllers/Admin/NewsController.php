@@ -125,9 +125,11 @@ class NewsController extends Controller
         $now = Date::now();
         $time = $now->subDays($daysAgo);
         $result = News::query()->where('created_at', '>', $time)->delete();
-        return redirect()->route('admin.news.index')->with("success", 'Новости успешно удалены');
+        if($result){
+            return redirect()->route('admin.resource.index')->with("success", 'Новости успешно удалены');
+        }
 
-        /*return redirect()->route('admin.news.index')->with("success", 'Ошибка сервера');*/
+        return redirect()->route('admin.resource.index')->with("success", 'Ошибка сервера');
     }
 
 
