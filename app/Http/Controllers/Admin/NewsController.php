@@ -98,10 +98,9 @@ class NewsController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
      * @param \App\News\News $news
      * @return \Illuminate\Http\RedirectResponse
-     * TODO remove try/catch
+     * @throws \Exception
      */
 
     public function destroy(News $news)
@@ -115,24 +114,20 @@ class NewsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the old resources from storage.
      *
-     * @param \App\News\News $news
-     * @param $time
+     * @param $daysAgo
      * @return \Illuminate\Http\RedirectResponse
      */
 
-    public function destroyNewsByTime($daysAgo)
+    public function destroyOld($daysAgo)
     {
         $now = Date::now();
-        $time = $now + $daysAgo;
+        $time = $now->subDays($daysAgo);
         $result = News::query()->where('created_at', '>', $time)->delete();
-
         return redirect()->route('admin.news.index')->with("success", 'Новости успешно удалены');
 
-           /* return redirect()->route('admin.news.index')->with("success", 'Ошибка сервера');*/
-
-
+        /*return redirect()->route('admin.news.index')->with("success", 'Ошибка сервера');*/
     }
 
 

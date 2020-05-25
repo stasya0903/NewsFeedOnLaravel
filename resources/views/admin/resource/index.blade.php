@@ -64,6 +64,21 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div id="app">
+                    <div class="card">
+                        <div class="card-header pink-bg text-white text-center">{{ __('Загрузить новости')  }}</div>
+                        <div class="card-body">
+
+                            <a href="{{route('admin.news.deleteOld', 1)}}"
+                               class="btn btn-outline-secondary pink-bgHover">
+                                {{ __('Удалить старые новости') }}
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <table class="table table-striped mt-2">
             <thead>
