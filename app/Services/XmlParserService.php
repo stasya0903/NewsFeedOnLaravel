@@ -19,13 +19,6 @@ class XmlParserService
     public function saveNews($resource)
     {
         $this->pushToDb($this->getData($resource->xmlSrc), $resource->id);
-        /*if($result){
-            broadcast(new EventJobAdded(Queue::size('parsing')));
-            EventJobAdded::broadcast(Queue::size('parsing'));
-
-            Log::info(Queue::size('parsing'));
-
-        }*/
 
     }
 

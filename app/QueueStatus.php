@@ -8,7 +8,7 @@ class QueueStatus extends Model
 {
     public $count;
 
-    public function __construct(array $attributes = [], $count)
+    public function __construct($count,$attributes = [] )
     {
         parent::__construct($attributes);
         $this->count = $count;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\News\News;
 use App\Resource;
+use App\Services\NewsAgeService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Orchestra\Parser\Xml\Facade as XmlParser;
@@ -18,8 +19,11 @@ class ResourseController extends Controller
      */
     public function index()
     {
+        $newsAge = new NewsAgeService();
         return response()->view('admin.resource.index', [
-            'resources' => Resource::all()
+            'resources' => Resource::all(),
+            'maximumNewsAge' => $newsAge->maximumAge,
+            'NewsAgeArray' => $newsAge->currentAgesArray
         ]);
     }
 
@@ -27,7 +31,7 @@ class ResourseController extends Controller
     {
         return response()->view('admin.resource.show', [
             'resource' => $resource,
-            'news'=> $resource->news()
+            'news' => $resource->news()
         ]);
     }
 
@@ -66,11 +70,11 @@ class ResourseController extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
-    public function destroy( Resource $resource)
+    public function destroy(Resource $resource)
     {
         $result = $resource->delete();
         if ($result) {
-            return redirect(route('admin.resource.index'))->with("success", 'Ресурс успешно удалена');
+            return redirect(route('admin.resource.index'))->with("success", 'Ресурс успешно удален');
         } else {
             return redirect(route('admin.resource.index'))->with("error", 'Ошибка сервера');
         }
@@ -97,4 +101,6 @@ class ResourseController extends Controller
 
         return $data;
     }
+
+
 }

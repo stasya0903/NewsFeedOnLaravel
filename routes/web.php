@@ -73,7 +73,7 @@ Route::group([
         ], function () {
             Route::get('/export', 'NewsController@export')->name('export');
             Route::post('/export', 'NewsController@exportRespond')->name('export');
-            Route::get('/deleteOld/{days}', 'NewsController@destroyOld')->name('deleteOld');
+            Route::delete('/deleteOld', 'NewsController@destroyOld')->name('deleteOld');
         });
         Route::resources([
             'news' => 'NewsController',

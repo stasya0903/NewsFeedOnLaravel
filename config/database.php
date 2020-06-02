@@ -45,8 +45,8 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('DATABASE_URL','db4free.net' ),
-            'host' => env('DB_HOST', 'db4free.net'),
+            'url' => env('DATABASE_URL' ),
+            'host' => env('DB_HOST' ),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'laravel_local'),
             'username' => env('DB_USERNAME', 'newsonlaravel'),

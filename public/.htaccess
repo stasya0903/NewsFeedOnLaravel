@@ -22,4 +22,6 @@
      # Handle Authorization Header
         RewriteCond %{HTTP:Authorization} .
         RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+        AddType  application/x-httpd-php         .php
+        AddType  application/x-httpd-php-source  .phps
 </IfModule>

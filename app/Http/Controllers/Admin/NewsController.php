@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\News\Category;
 use App\News\News;
 use App\News\NewsExport;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Date;
@@ -116,21 +117,24 @@ class NewsController extends Controller
     /**
      * Remove the old resources from storage.
      *
-     * @param $daysAgo
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
 
-    public function destroyOld($daysAgo)
+    public function destroyOld(Request $request)
     {
-        $now = Date::now();
-        $time = $now->subDays($daysAgo);
+        $now = New Carbon(now());
+
+        $time = $now->subDays($request->get('days_ago'));
+
         $result = News::query()->where('created_at', '<', $time->toDateString())
                                 ->delete();
         if($result){
             return redirect()->route('admin.resource.index')->with("success", 'Новости успешно удалены');
         }
 
-        return redirect()->route('admin.resource.index')->with("success", 'Ошибка сервера');
+        return redirect()->route('admin.resource.index')->with("error", 'Ошибка сервера. Попробуйте позже');
     }
 
 
