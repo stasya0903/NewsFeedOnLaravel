@@ -19,7 +19,7 @@
                         </div>
                     @endif
                     @guest
-                        <div class="lead text-center justify-content-around d-flex">
+                        <div class="lead text-center justify-content-lg-around d-lg-flex">
                             <div> Для доступа ко всем ресурсам:</div>
                             <div>
                                 <a href="{{route('register')}}" class="text-white">

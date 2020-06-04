@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-light w-100">
     <div class="container">
         <div class="text-center">
             <h2 class=""><a class="navbar-brand" href="{{route('Home')  }}">New<span>s</span></a></h2>
