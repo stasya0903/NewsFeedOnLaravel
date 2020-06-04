@@ -6,13 +6,13 @@
                    aria-label="Search">
         </form>
 
-        <div class="col-2 d-flex justify-content-sm-between align-items-center">
+        <div class="d-flex justify-content-sm-between align-items-center">
             <!-- Authentication Links -->
             @guest
-                <div class="div d-flex justify-content-between">
+                <div class="d-flex justify-content-between">
                     <div class="m-2">
                         <a class="btn btn-sm btn-outline-secondary pink-bgHover" href="{{route('login')}}">
-                            <span class="d-sm-none d-xs-none d-lg-inline">Войти</span>
+                            <span class="d-none d-lg-inline">Войти</span>
                             <span class="d-lg-none d-sm-inline d-xs-inline">
                                 <i class="fas fa-sign-in-alt"></i>
                             </span>
@@ -22,7 +22,7 @@
                         @if (Route::has('register'))
                             <a class="btn btn-sm btn-outline-secondary pink-bgHover"
                                href="{{route('register')}}">
-                                <span class="d-sm-none d-xs-none d-lg-inline"> Регистрация</span>
+                                <span class="d-none d-lg-inline"> Регистрация</span>
 
                             <span class="d-lg-none d-sm-inline d-xs-inline">
                                 <i class="fas fa-user-plus"></i>
