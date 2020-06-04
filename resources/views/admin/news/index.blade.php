@@ -16,7 +16,8 @@
                 <div class="col-md-12">
                     <div
                         class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative ">
-                        <img class="d-block" src=" {{url( $item->image ?? 'https://via.placeholder.com/150x100' )}}" alt="...">
+                        <img class="d-block" src=" {{url( $item->image ?? 'https://via.placeholder.com/150x100' )}}"
+                             alt="...">
                         <div class="col p-4 d-flex flex-column position-static">
                             <strong class="d-inline-block mb-2 ">Категория</strong>
                             <h3 class="mb-0 yellow">{{$item->title}}</h3>
@@ -25,18 +26,20 @@
                             <div class="d-flex justify-content-sm-between align-items-center mt-2">
 
 
-
                             </div>
                         </div>
                         <div class="col-auto d-flex align-items-center">
-                            <form id="delete-form-{{$item->id}}" action="{{ route('admin.news.delete',$item->id ) }}" method="POST" style="display: none;">
+                            <form id="delete-form-{{$item->id}}"
+                                  action="{{ route('admin.news.delete',$item->id ) }}"
+                                  method="POST"
+                                  style="display: none;">
                                 @csrf
                             </form>
                             <a href="{{ route('admin.news.show', $item->id ) }}"
                                class="btn btn-sm btn-outline-secondary pink-bgHover">Изменить</a>
                             <a class="btn btn-sm btn-outline-secondary pink-bgHover" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
-                                                     document.getElementById('delete-form-{{$item->id}}').submit();">
+                                   document.getElementById('delete-form-{{$item->id}}').submit();">
                                 Удалить
                             </a>
                         </div>

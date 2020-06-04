@@ -25,7 +25,7 @@ class NewsParsing implements ShouldQueue
      */
     public function __construct($resource)
     {
-         $this->resource = $resource;
+        $this->resource = $resource;
     }
 
     /**
@@ -37,6 +37,6 @@ class NewsParsing implements ShouldQueue
     public function handle(XmlParserService $parserService)
     {
         broadcast(new EventJobAdded(Queue::size('parsing')));
-         $parserService->saveNews($this->resource);
+        $parserService->saveNews($this->resource);
     }
 }

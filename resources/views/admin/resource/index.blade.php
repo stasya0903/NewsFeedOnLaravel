@@ -102,12 +102,11 @@
 
                                         </div>
                                     </div>
-                                        @else
-                                            <div class="card-body">
-                                                Все новости актуальны. Нет новостей добавленых более 1 дня назад
-                                            </div>
-                                        @endif
-
+                                @else
+                                    <div class="card-body">
+                                        Все новости актуальны. Нет новостей добавленых более 1 дня назад
+                                    </div>
+                                @endif
 
 
                             </div>
@@ -127,25 +126,39 @@
                 <th>Url</th>
                 <th>XML Url</th>
                 <th>Картинка</th>
+                <th class="align-items-center text-center">Загрузить новости</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
             @forelse($resources as $item)
                 <tr>
-                    <form method="POST" action="{{route('admin.resource.destroy',$item)}}">
-                        @csrf
-                        @method("DELETE")
-                        <td><p><a href="{{route('admin.resource.show', $item)}}">{{ $item->title  }} </a></p></td>
-                        <td><p><a href="{{ $item->link  }} ">{{ $item->link  }}</a></p></td>
-                        <td><p><a href="{{ $item->xmlSrc  }}">{{ $item->xmlSrc  }}</a></p>
-                        </td>
-                        <td>
-                            <img src="{{$item->image}}" alt="" class="img-thumbnail bg-transparent border-0">
-                        </td>
-                        <td><input type="submit" value="Удалить"></td>
 
-                    </form>
+                    <td><p><a href="{{route('admin.resource.show', $item)}}">{{ $item->title  }} </a></p></td>
+                    <td><p><a href="{{ $item->link  }} ">{{ $item->link  }}</a></p></td>
+                    <td><p><a href="{{ $item->xmlSrc  }}">{{ $item->xmlSrc  }}</a></p>
+                    </td>
+                    <td>
+                        <img src="{{$item->image}}" alt="" class="img-thumbnail bg-transparent border-0">
+                    </td>
+                    <td class="align-items-center text-center">
+                        <p>
+                            <a href="{{route('admin.parseByResource', $item)}}">
+                                <span class="fas fa-arrow-circle-down fontSize30"></span>
+                            </a>
+                        </p>
+                    </td>
+                    <td class="align-items-center text-center">
+                        <form method="POST" action="{{route('admin.resource.destroy',$item)}}">
+                            @csrf
+                            @method("DELETE")
+                            <button type="submit" class="bg-transparent border-0 text-center">
+                                <span class="icon-delete fontSize30"></span>
+                            </button>
+                        </form>
+                    </td>
+
+
                 </tr>
 
             @empty

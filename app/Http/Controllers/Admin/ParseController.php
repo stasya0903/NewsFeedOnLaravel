@@ -8,6 +8,7 @@ use App\Jobs\NewsParsing;
 use App\News\Category;
 use App\News\News;
 use App\Resource;
+use App\Services\XmlParserService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
@@ -25,5 +26,18 @@ class ParseController extends Controller
 
         return redirect(route('admin.resource.index'))->with('totalSteps', Queue::size('parsing'));
     }
+
+    public function parseByResource(Resource $resource, XmlParserService $parserService)
+    {
+        $result = $parserService->saveNews($resource);
+        if ($result) {
+            return redirect(route('admin.resource.index'))
+                ->with("success", 'Новости успешно загружены с выбранного ресурса');
+        } else {
+            return redirect(route('admin.resource.index'))
+                ->with("error", 'Ошибка сервера');
+        }
+    }
+
 
 }

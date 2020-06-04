@@ -19,7 +19,7 @@ Route::get('/auth/{socialNetwork}/response', 'LoginController@response')->name('
 Route::group([
     'prefix' => 'profile',
     'as' => 'profile.',
-    'middleware'=> 'auth'
+    'middleware' => 'auth'
 ], function () {
     Route::get('/', 'ProfileController@edit')->name('edit');
     Route::put('/', 'ProfileController@update')->name('update');
@@ -62,11 +62,13 @@ Route::group([
     'prefix' => 'admin',
     'namespace' => 'Admin',
     'as' => 'admin.',
-    'middleware'=>['auth','is_admin']
+    'middleware' => ['auth', 'is_admin']
 ],
     function () {
         Route::get('/index', 'IndexController@index')->name('index');
         Route::get('/parser', 'ParseController@index')->name('parser');
+        Route::get('/parse/{resource}', 'ParseController@parseByResource')->name('parseByResource');
+
         Route::group([
             'prefix' => 'news',
             'as' => 'news.'
@@ -78,7 +80,7 @@ Route::group([
         Route::resources([
             'news' => 'NewsController',
             'category' => 'CategoryController',
-            'resource'=>'ResourseController'
+            'resource' => 'ResourseController'
         ]);
 
         Route::group([

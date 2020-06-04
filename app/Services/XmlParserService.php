@@ -18,7 +18,7 @@ class XmlParserService
 
     public function saveNews($resource)
     {
-        $this->pushToDb($this->getData($resource->xmlSrc), $resource->id);
+        return $this->pushToDb($this->getData($resource->xmlSrc), $resource->id);
 
     }
 
@@ -52,11 +52,13 @@ class XmlParserService
                     'resource_id' => $resource_id
                 ]);
 
-                if (!$news->save()) {
+               return $news->save();
+         /*   ) {
                     return redirect(route('admin.news.index'))
                         ->with("error", 'Ошибка добавления данных');
-                }
-                session()->flash('success', Queue::size('parsing'));
+                }*/
+                /*session()->flash('success', Queue::size('parsing'));*/
+
 
             }
         }
