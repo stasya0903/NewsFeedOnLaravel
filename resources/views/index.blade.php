@@ -19,7 +19,7 @@
                         </div>
                     @endif
                     @guest
-                        <div class="lead text-centern justify-content-around d-flex">
+                        <div class="lead text-center justify-content-around d-flex">
                             <div> Для доступа ко всем ресурсам:</div>
                             <div>
                                 <a href="{{route('register')}}" class="text-white">
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                     @else
-                        <p class="lead">
+                        <p class="lead text-center">
                             Добро пожаловать {{ Auth::user()->name }} </p>
                     @endguest
                 </div>
@@ -44,22 +44,22 @@
         </div>
     </div>
 
-    @isset($news)
+    @forelse($news as $item)
         <div class="case container mt-3">
             <div class="row">
                 <div class="col-md-6 col-lg-6 col-xl-8 d-flex">
-                    <a href="{{route('news.show', $news)}}" class="img w-80 mb-3 mb-md-0"
-                       style="background-image: url({{$news->image}});"></a>
+                    <a href="{{route('news.show', $item)}}" class="img w-80 mb-3 mb-md-0"
+                       style="background-image: url({{$item->image}});"></a>
                 </div>
                 <div class="col-md-6 col-lg-6 col-xl-4 d-flex">
                     <div class="text w-80 pl-md-3">
-                        <span class="subheading">{{$category->title}}</span>
-                        <h2><a href="{{route('news.show', $news)}}">{{$news->title}}</a></h2>
+                        <span class="subheading">{{$categories[$item->category_id]->title}}</span>
+                        <h2><a href="{{route('news.show', $item)}}">{{$item->title}}</a></h2>
                         <div class="meta">
                             <p class="mb-0">
-                                <a href="#">{{Date::parse($news->created_at)->format('d/m/Y')}}</a> |
-                                <a href="#">@if($hoursAgo > 0){{$hoursAgo}}
-                                    {{Lang::choice('час|часа|часов', $hoursAgo, [], 'ru')}}  назад</a>
+                                <a href="#">{{Date::parse($item->created_at)->format('d/m/Y')}}</a> |
+                                <a href="#">@if($item->getAgeInHours() > 0){{$item->getAgeInHours()}}
+                                    {{Lang::choice('час|часа|часов', $item->getAgeInHours(), [], 'ru')}}  назад</a>
                                 @else
                                     Меньше часа назад
                                 @endif</p>
@@ -68,6 +68,8 @@
                 </div>
             </div>
         </div>
+    @empty
+        Нет новостей
+    @endforelse
 
-    @endisset
 @endsection

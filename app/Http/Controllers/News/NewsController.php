@@ -15,13 +15,14 @@ class NewsController extends Controller
             'news' => News::query()
                 ->inRandomOrder()
                 ->paginate(6),
-            'categories' => Category::all()->keyBy('id'),
+            'categories' => Category::all()
+                ->keyBy('id'),
         ]);
     }
 
     public function show(News $news)
     {
-        $newsToPromote =  News::where('category_id', $news->category_id)
+        $newsToPromote = News::where('category_id', $news->category_id)
             ->inRandomOrder()
             ->take(3)
             ->get();
@@ -30,7 +31,7 @@ class NewsController extends Controller
             'news' => $news,
             'newsToPromote' => $newsToPromote->except([$news->id]),
             'resource' => $news->resource()->first(),
-            'categories'=> $categoryToOffer
+            'categories' => $categoryToOffer
         ]);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\News\Category;
 use App\News\News;
 use Carbon\Carbon;
 use Cassandra\Date;
@@ -19,26 +20,15 @@ class HomeController extends Controller
     {
         $news = News::query()
             ->where('image', '<>', null)
-            ->latest()
-            ->first();
-        $hoursDifference = 0;
-        $category = null;
+            ->inRandomOrder()
+            ->take(3)
+            ->get();
 
-        if ($news) {
-            $hoursDifference = $this->getHoursDifference($news);
-            $category = $news->category()->first();
-        }
         return view('index', [
             'news' => $news,
-            'category' => $category,
-            'hoursAgo' => $hoursDifference
+            'categories' => Category::all()->keyBy('id')
         ]);
     }
 
-    private function getHoursDifference($news)
-    {
-        $now = new Carbon(now());
-        $created = new Carbon ($news->created_at);
-        return $now->diffInHours($created);
-    }
+
 }

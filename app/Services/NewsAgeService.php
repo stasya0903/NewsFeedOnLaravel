@@ -67,5 +67,9 @@ class NewsAgeService
         return $newsCreationDate->diffInDays(New Carbon(now()));
     }
 
+    public function getHoursDifference($news)
+    {
+
+    }
 
 }

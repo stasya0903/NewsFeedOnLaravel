@@ -3,6 +3,7 @@
 namespace App\News;
 
 use App\Resource;
+use App\Services\NewsAgeService;
 use Carbon\Carbon;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +17,6 @@ use Illuminate\Support\Facades\Storage;
 class News extends Model
 {
     protected $fillable = ['title', 'text', 'image', 'isPrivate', 'category_id', 'guid', 'resource_id'];
-
 
     public function category()
     {
@@ -49,6 +49,11 @@ class News extends Model
             'image' => "Изображение",
             'isPrivate' => 'Приватность',
         ];
+    }
+
+    public function getAgeInHours()
+    {
+        return (new Carbon(now()))->diffInHours($this->created_at);
     }
 
 
