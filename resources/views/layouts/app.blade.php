@@ -13,11 +13,11 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
-  {{--  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,500;0,900;1,700&family=Roboto+Mono:wght@100;400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,500;0,900;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.css') }}">--}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.css') }}">
 
 
     <!-- This is Styles -->
@@ -88,7 +88,9 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div>
+                @yield('content')
+            </div>
         </main>
     </div>
 </body>

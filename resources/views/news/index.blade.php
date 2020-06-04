@@ -9,6 +9,7 @@
 @endsection
 
 @section('content')
+
         <div class="container pt-5">
             <div class="row d-flex">
                 @forelse($news as $item)
