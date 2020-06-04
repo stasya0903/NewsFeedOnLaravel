@@ -31,8 +31,10 @@ class LoginController extends Controller
             return redirect()->route('Home');
 
         } catch (\Exception $exception) {
+
             return redirect('/login')
-                ->with('error' , 'OOPS! Произошла ошибка авторизации вашего акаунта');
+
+                ->with('error' , $exception->getMessage());
         }
 
 
