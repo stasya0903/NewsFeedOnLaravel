@@ -1,4 +1,4 @@
-<header class="blog-header py-3 container-fluid">
+<header class="blog-header py-3 container-fluid w-100">
     <div class="row flex-nowrap justify-content-between align-items-center ml-3 mr-3">
         <form class=" d-flex justify-content-center md-form form-sm mt-0">
             <i class="line-height-3 fas fa-search" aria-hidden="true"></i>
