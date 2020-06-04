@@ -3,6 +3,7 @@
     @include('menu')
 @endsection
 @section('content')
+    <div class="pink-bg"></div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -13,7 +14,7 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ /*old('email')*/ 'stasya0903@mail.ru'}}" required autocomplete="email" autofocus>
@@ -27,7 +28,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Пароль') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" value="{{ /*old('email')*/ '12345678'}}">
@@ -46,7 +47,7 @@
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
+                                        {{ __('Запомнить меня') }}
                                     </label>
                                 </div>
                             </div>
@@ -54,10 +55,11 @@
 
                         <div class="d-flex form-group row">
                             <div class="col-md-6 offset-md-4">
-                            <ul class="media-social list-unstyled d-flex">
+                                <p>Войти через</p>
+                                <ul class="media-social list-unstyled d-flex">
                                 <li class="socialMediaIcon"><a class="socialMediaIconLink" href="{{ route('loginSocial', 'github') }}"><span class="fab fa-github"></span></a></li>
                                {{-- <li class="socialMediaIcon"><a class="socialMediaIconLink" href="#"><span class="icon-facebook"></span></a></li>--}}
-                                <li class="socialMediaIcon"><a class="socialMediaIconLink" href="{{ route('loginSocial', 'instagram') }}"><span class="icon-instagram"></span></a></li>
+                                {{--<li class="socialMediaIcon"><a class="socialMediaIconLink" href="{{ route('loginSocial', 'instagram') }}"><span class="icon-instagram"></span></a></li>--}}
                                 <li class="socialMediaIcon"><a class="socialMediaIconLink" href="{{ route('loginSocial', 'vkontakte') }}"><span class="fab fa-vk"></span></a></li>
                             </ul>
                             </div>
@@ -71,7 +73,7 @@
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link hoverYellow grey" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                        {{ __('Забыли пароль?') }}
                                     </a>
                                 @endif
                             </div>
