@@ -1,6 +1,8 @@
+<div>
 
-    <nav class="navbar navbar-expand-lg navbar-light w-100 container-fluid">
-        <div class="container">
+
+    <div class="navbar container-fluid"> <nav class="navbar-expand-lg navbar-light w-100 container">
+
             <div class="text-center">
                 <h2 class=""><a class="navbar-brand" href="{{route('Home')  }}">New<span>s</span></a></h2>
             </div>
@@ -48,11 +50,12 @@
                             href="{{ route('news.categories.index') }}" class="nav-link">По Категориям</a></li>
                 </ul>
             </div>
-        </div>
 
 
 
 </nav>
+    </div>
+
 
 
 
