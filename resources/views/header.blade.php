@@ -5,21 +5,37 @@
             <input class="bg-transparent form-control form-control-sm ml-3 w-75 form-underline" type="text"
                    aria-label="Search">
         </form>
-        <div class="col-4 text-center">
-            <h2 class=""><a class="navbar-brand" href="{{route('Home')  }}">New<span>s</span></a></h2>
-        </div>
 
         <div class="col-2 d-flex justify-content-sm-between align-items-center">
             <!-- Authentication Links -->
             @guest
-                <a class="btn btn-sm btn-outline-secondary pink-bgHover" href="{{route('login')}}">Войти</a>
-                @if (Route::has('register'))
-                    <a class="btn btn-sm btn-outline-secondary pink-bgHover"
-                       href="{{route('register')}}">Регистрация</a>
-                @endif
+                <div class="div d-flex justify-content-between">
+                    <div class="m-2">
+                        <a class="btn btn-sm btn-outline-secondary pink-bgHover" href="{{route('login')}}">
+                            <span class="d-sm-none d-xs-none d-lg-inline">Войти</span>
+                            <span class="d-lg-none d-sm-inline d-xs-inline">
+                                <i class="fas fa-sign-in-alt"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="m-2">
+                        @if (Route::has('register'))
+                            <a class="btn btn-sm btn-outline-secondary pink-bgHover"
+                               href="{{route('register')}}">
+                                <span class="d-sm-none d-xs-none d-lg-inline"> Регистрация</span>
+
+                            <span class="d-lg-none d-sm-inline d-xs-inline">
+                                <i class="fas fa-user-plus"></i>
+                            </span>
+                            </a>
+                    </div>
+                </div>
+
+            @endif
             @else
                 <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
 
@@ -42,3 +58,4 @@
         </div>
     </div>
 </header>
+

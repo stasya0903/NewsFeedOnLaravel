@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
+        <div class="text-center">
+            <h2 class=""><a class="navbar-brand" href="{{route('Home')  }}">New<span>s</span></a></h2>
+        </div>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain"
                 aria-controls="navbarsExample06" aria-expanded="false" aria-label="Toggle navigation">
