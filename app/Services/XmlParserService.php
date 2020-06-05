@@ -25,7 +25,6 @@ class XmlParserService
     public function getData($source)
     {
         $xml = XmlParser::load($source);
-        /*dd($xml);*/
         $data = $xml->parse([
             'news' => ['uses' => 'channel.item[guid,title,link,description,pubDate,enclosure::url,category]']
         ]);
@@ -52,16 +51,17 @@ class XmlParserService
                     'resource_id' => $resource_id
                 ]);
 
-               return $news->save();
-         /*   ) {
-                    return redirect(route('admin.news.index'))
-                        ->with("error", 'Ошибка добавления данных');
-                }*/
-                /*session()->flash('success', Queue::size('parsing'));*/
+              $result = $news->save();
+              if(!$result){
+                  return redirect(route('admin.news.index'))
+                      ->with("error", 'Ошибка загрузки данных');
+              }
 
 
             }
+
         }
+        return true;
     }
 
     private function getCategoryId($categoryTitle)

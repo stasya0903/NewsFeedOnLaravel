@@ -54,10 +54,10 @@
 </div>
 @endif
 <main role="main" class="flex-shrink-0 page-content py-4">
-    <div>
+
         @yield('content')
 
-    </div>
+
 
 </main>
 @include('footer')
