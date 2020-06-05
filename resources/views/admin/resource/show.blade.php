@@ -32,6 +32,9 @@
             @endforelse
         </div>
     </div>
+    @include('pagination')
 @endsection
+
+
 
 

@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use Orchestra\Parser\Xml\Facade as XmlParser;
 
 
-class ResourseController extends Controller
+class ResourceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,6 +32,7 @@ class ResourseController extends Controller
         return response()->view('admin.resource.show', [
             'resource' => $resource,
             'news' => $resource->news()
+                ->paginate(20)
         ]);
     }
 

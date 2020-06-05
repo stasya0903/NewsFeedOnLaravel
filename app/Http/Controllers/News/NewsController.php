@@ -14,7 +14,7 @@ class NewsController extends Controller
         return view('news.index', [
             'news' => News::query()
                 ->inRandomOrder()
-                ->paginate(6),
+                ->paginate(20),
             'categories' => Category::all()
                 ->keyBy('id'),
         ]);

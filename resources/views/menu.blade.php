@@ -36,17 +36,17 @@
                                     новости</a>
                             </div>
                         </li>
-                        <li class="nav-item {{ request()->routeIs('admin.index')?'active':'' }}">
+                        <li class="nav-item {{ request()->routeIs('admin.index')?'active-pink':'' }}">
                             <a href="{{route('admin.index')}}" class="nav-link">Главная</a>
                         </li>
                     @else
-                        <li class="nav-item {{ request()->routeIs('Home')?'active':'' }}"><a
+                        <li class="nav-item {{ request()->routeIs('Home')?'active-pink':'' }}"><a
                                 href="{{ route('Home') }}" class="nav-link">Главная</a></li>
                     @endif
                 @endauth
-                <li class="nav-item {{ request()->routeIs('news.index')?'active':'' }}"><a
+                <li class="nav-item {{ request()->routeIs('news.index')?'active-pink-pink':'' }}"><a
                         href="{{ route('news.index') }}" class="nav-link">Новости</a></li>
-                <li class="nav-item {{ request()->routeIs('news.categories.index')?'active':'' }}"><a
+                <li class="nav-item {{ request()->routeIs('news.categories.index')?'active-pink-pink':'' }}"><a
                         href="{{ route('news.categories.index') }}" class="nav-link">По Категориям</a></li>
             </ul>
         </div>

@@ -80,7 +80,7 @@ Route::group([
         Route::resources([
             'news' => 'NewsController',
             'category' => 'CategoryController',
-            'resource' => 'ResourseController'
+            'resource' => 'ResourceController'
         ]);
 
         Route::group([
