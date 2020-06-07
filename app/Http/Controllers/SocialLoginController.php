@@ -47,7 +47,8 @@ class SocialLoginController extends Controller
 
     protected function getSocialAuthAdapter($user, $socialNetwork): SocialMediaAdaptor
     {
-        $socialNetworkAdaptor = "App\Adaptors\'" . ucfirst($socialNetwork) . 'Adaptor';
+        $socialNetworkAdaptor = "App\Adaptors\\" . ucfirst($socialNetwork) . 'Adaptor';
+  /*      var_dump($socialNetwork, $socialNetworkAdaptor);*/
         return /*new VkontakteAdaptor($user, $socialNetwork)*/new $socialNetworkAdaptor($user, $socialNetwork);
 
     }
