@@ -14,7 +14,7 @@ class AlterTableNewsAddSocAuth extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('id_in_soc',20)
+            $table->string('id_in_soc',50)
                 ->default('')
                 ->comment('id в соцсети');
             $table->enum('type_auth', ['site', 'vkontakte', 'github'])
