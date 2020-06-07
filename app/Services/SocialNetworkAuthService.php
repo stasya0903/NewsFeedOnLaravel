@@ -9,7 +9,7 @@ use SocialiteProviders\Manager\OAuth2\User as UserOAuth;
 
 class SocialNetworkAuthService
 {
-    public function getUserBySocId(SocialMediaAdaptor $user, string $socName)
+    public function getUserBySocId( $user, string $socName)
     {
         $userInSystem = User::query()
                 ->where('id_in_soc', $user->getId_in_soc())
@@ -24,7 +24,7 @@ class SocialNetworkAuthService
         return $userInSystem;
     }
 
-    public function userWithSameEmail( SocialMediaAdaptor $user, $socialNetwork)
+    public function userWithSameEmail( $user, $socialNetwork)
     {
         $userInTheSystem = User::query()
             ->where('email', $user->getEmail())
