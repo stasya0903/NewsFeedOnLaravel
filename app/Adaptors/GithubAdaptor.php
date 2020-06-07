@@ -4,7 +4,7 @@
 namespace App\Adaptors;
 
 
-class GitHubAdaptor extends SocialMediaAdaptor
+class GithubAdaptor extends SocialMediaAdaptor
 {
     public function getName(): string
     {
