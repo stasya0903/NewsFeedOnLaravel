@@ -31,7 +31,7 @@ return [
     'google' => [
         'client_id' => 'GOOGLE_KEY',
         'client_secret' => 'GOOGLE_SECRET',
-        'redirect' => 'GOOGLE_REDIRECT',
+        'redirect' => env('GOOGLE_REDIRECT_URL'),
     ],
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
