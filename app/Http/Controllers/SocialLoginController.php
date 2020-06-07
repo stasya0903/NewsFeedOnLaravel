@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Adaptors\SocialMediaAdaptor;
 use App\Adaptors\SocialNetworkAuthService;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Model\Repository\ProductRepository;
+use App\Adaptors\GitHubAdaptor;
+use App\Adaptors\VkontakteAdaptor;
+
 
 class SocialLoginController extends Controller
 {
@@ -19,7 +23,7 @@ class SocialLoginController extends Controller
         return Socialite::with($socialNetwork)->redirect();
     }
 
-    public function response(SocialNetworkAuthService $userAdaptor, $socialNetwork)
+    public function response(SocialNetworkAuthService $socialNetworkAuthService, $socialNetwork)
     {
         if (Auth::check()) {
             return redirect()->route('Home');
@@ -27,7 +31,7 @@ class SocialLoginController extends Controller
 
         try {
             $user = $this->getSocialAuthAdapter(Socialite::driver($socialNetwork)->user(), $socialNetwork);
-            $userInSystem = $userAdaptor->getUserBySocId($user, $socialNetwork);
+            $userInSystem = $socialNetworkAuthService->getUserBySocId($user, $socialNetwork);
             Auth::login($userInSystem);
             return redirect()->route('Home');
 
@@ -41,7 +45,7 @@ class SocialLoginController extends Controller
 
     }
 
-    protected function getSocialAuthAdapter($user, $socialNetwork)
+    protected function getSocialAuthAdapter($user, $socialNetwork): SocialMediaAdaptor
     {
         $socialNetworkAdaptor = ucfirst($socialNetwork) . 'Adaptor';
         return new $socialNetworkAdaptor($user);
