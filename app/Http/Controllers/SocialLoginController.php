@@ -38,8 +38,7 @@ class SocialLoginController extends Controller
         } catch (\Exception $exception) {
 
             return redirect('/login')
-
-                ->with('error' , $exception->getMessage());
+                ->with('error', $exception->getMessage());
         }
 
 
@@ -48,8 +47,7 @@ class SocialLoginController extends Controller
     protected function getSocialAuthAdapter($user, $socialNetwork): SocialMediaAdaptor
     {
         $socialNetworkAdaptor = "App\Adaptors\\" . ucfirst($socialNetwork) . 'Adaptor';
-  /*      var_dump($socialNetwork, $socialNetworkAdaptor);*/
-        return /*new VkontakteAdaptor($user, $socialNetwork)*/new $socialNetworkAdaptor($user, $socialNetwork);
+        return new $socialNetworkAdaptor($user, $socialNetwork);
 
     }
 

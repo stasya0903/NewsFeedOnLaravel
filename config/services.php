@@ -28,6 +28,11 @@ return [
         'client_secret' => env('GITHUB_SECRET'),
         'redirect' => env('GITHUB_URL'),
     ],
+    'google' => [
+        'client_id' => 'GOOGLE_KEY',
+        'client_secret' => 'GOOGLE_SECRET',
+        'redirect' => 'GOOGLE_REDIRECT',
+    ],
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
