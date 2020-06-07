@@ -29,8 +29,8 @@ return [
         'redirect' => env('GITHUB_URL'),
     ],
     'google' => [
-        'client_id' => 'GOOGLE_KEY',
-        'client_secret' => 'GOOGLE_SECRET',
+        'client_id' => env('GOOGLE_KEY'),
+        'client_secret' => env('GOOGLE_SECRET'),
         'redirect' => env('GOOGLE_REDIRECT_URL'),
     ],
     'mailgun' => [

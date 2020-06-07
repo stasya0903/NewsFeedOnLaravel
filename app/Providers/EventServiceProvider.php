@@ -22,7 +22,8 @@ class EventServiceProvider extends ServiceProvider
             'SocialiteProviders\\VKontakte\\VKontakteExtendSocialite@handle',
             'SocialiteProviders\\Instagram\\InstagramExtendSocialite@handle',
             'SocialiteProviders\\GitHub\\GitHubExtendSocialite@handle',
-            'SocialiteProviders\\Google\\GoogleExtendSocialite@handle'
+            /*'SocialiteProviders\\Google\\GoogleExtendSocialite@handle'*/
+
         ],
     ];
 
