@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Adaptors\SocialMediaAdaptor;
-use App\Adaptors\SocialNetworkAuthService;
+use App\Services\SocialNetworkAuthService;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
