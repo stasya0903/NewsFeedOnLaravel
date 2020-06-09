@@ -10,12 +10,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Scout\Searchable;
 
 /**
  * @method static create(array $array)
  */
 class News extends Model
 {
+    use Searchable;
     protected $fillable = ['title', 'text', 'image', 'isPrivate', 'category_id', 'guid', 'resource_id'];
 
     public function category()
