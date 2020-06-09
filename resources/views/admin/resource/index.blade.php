@@ -76,7 +76,7 @@
                             @method('DELETE')
 
                             <div class="card-body">
-                                @if($maximumNewsAge > 0)
+                                @if($maximumNewsAge >= 0)
                                     <div class="form-group row">
                                         <label for="days"
                                                class="col-md-8 col-form-label text-md-right">

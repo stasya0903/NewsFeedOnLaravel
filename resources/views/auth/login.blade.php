@@ -8,7 +8,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header pink-bg text-white">{{ __('Login') }}</div>
+                    <div class="card-header pink-bg text-white">{{ __('Вход') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
@@ -76,11 +76,12 @@
                                                 <span class="fab fa-github"></span>
                                             </a>
                                         </li>
-                                        {{-- <li class="socialMediaIcon"><a class="socialMediaIconLink" href="#"><span class="icon-facebook"></span></a></li>--}}
-                                        {{--<li class="socialMediaIcon"><a class="socialMediaIconLink" href="{{ route('loginSocial', 'instagram') }}"><span class="icon-instagram"></span></a></li>--}}
-                                        <li class="socialMediaIcon"><a class="socialMediaIconLink"
-                                                                       href="{{ route('loginSocial', 'vkontakte') }}"><span
-                                                    class="fab fa-vk"></span></a></li>
+                                        <li class="socialMediaIcon">
+                                            <a class="socialMediaIconLink"
+                                               href="{{ route('loginSocial', 'vkontakte') }}">
+                                                <span class="fab fa-vk"></span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -88,7 +89,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-outline-secondary pink-bgHover">
-                                        {{ __('Login') }}
+                                        {{ __('Войти') }}
                                     </button>
 
                                     @if (Route::has('password.request'))
