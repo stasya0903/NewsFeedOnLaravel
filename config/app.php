@@ -166,7 +166,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Unisharp\Ckeditor\ServiceProvider::class,
-       /* Laravel\Scout\ScoutServiceProvider::class,*/
+        Laravel\Scout\ScoutServiceProvider::class,
         ServiceProvider::class,
 
 
