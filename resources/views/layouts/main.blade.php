@@ -56,7 +56,7 @@
 
 
 <main role="main" class="flex-shrink-0 page-content py-4">
-    <div class="wrapper">
+    <div class="wrapper" id="app">
     @yield('content')
     </div>
 </main>

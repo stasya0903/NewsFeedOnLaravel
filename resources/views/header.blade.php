@@ -6,6 +6,9 @@
                    aria-label="Search">
         </form>
 
+        <Search></Search>
+        <search></search>
+
         <div class="d-flex justify-content-sm-between align-items-center">
             <!-- Authentication Links -->
             @guest

@@ -42,7 +42,7 @@ class XmlParserService
             if (!$newsWithSameTitle) {
                 $news = new News();
                 $news->fill([
-                    'title' => $item['title'],
+                    'title' => $item['title'] ,
                     'text' => $item['description'],
                     'created_at' => $item['pubDate'],
                     'category_id' => $this->getCategoryId($item['category']),
@@ -67,8 +67,8 @@ class XmlParserService
     private function getCategoryId($categoryTitle)
     {
         $category = Category::firstOrCreate([
-            'title' => $categoryTitle,
-            'slug' => str_replace(' ', '_', $categoryTitle)
+            'title' => $categoryTitle ?? 'Другое',
+            'slug' => str_replace(' ', '_', $categoryTitle ?? 'Другое')
         ]);
         return $category->id;
     }

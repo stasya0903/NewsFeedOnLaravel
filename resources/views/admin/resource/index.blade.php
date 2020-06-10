@@ -46,7 +46,7 @@
 
             </div>
             <div class="col-md-4">
-                <div id="app">
+               {{-- <div id="app">--}}
                     <div class="card">
                         <div class="card-header text-center">{{ __('Загрузка Новостей')  }}</div>
                         <div class="card-body ">
@@ -61,7 +61,7 @@
                         </div>
 
 
-                    </div>
+                 {{--   </div>--}}
                 </div>
 
             </div>
