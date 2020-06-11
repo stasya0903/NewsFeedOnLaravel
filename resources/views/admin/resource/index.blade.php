@@ -46,22 +46,21 @@
 
             </div>
             <div class="col-md-4">
-               {{-- <div id="app">--}}
-                    <div class="card">
-                        <div class="card-header text-center">{{ __('Загрузка Новостей')  }}</div>
-                        <div class="card-body ">
 
-                            <a href="{{route('admin.parser')}}"
-                               class="btn btn-outline-secondary pink-bgHover">
-                                {{ __('Запарсить новости со всех источников') }}
-                            </a>
+                <div class="card">
+                    <div class="card-header text-center">{{ __('Загрузка Новостей')  }}</div>
+                    <div class="card-body ">
 
-
-                            <example-component :total-steps="{{session('totalSteps') ?? 0}}"></example-component>
-                        </div>
+                        <a href="{{route('admin.parser')}}"
+                           class="btn btn-outline-secondary pink-bgHover">
+                            {{ __('Запарсить новости со всех источников') }}
+                        </a>
 
 
-                 {{--   </div>--}}
+                        <example-component :total-steps="{{session('totalSteps') ?? 0}}"></example-component>
+                    </div>
+
+
                 </div>
 
             </div>
@@ -76,7 +75,7 @@
                             @method('DELETE')
 
                             <div class="card-body">
-                                @if($maximumNewsAge > 0)
+                                @if($maximumNewsAge > 1)
                                     <div class="form-group row">
                                         <label for="days"
                                                class="col-md-8 col-form-label text-md-right">
