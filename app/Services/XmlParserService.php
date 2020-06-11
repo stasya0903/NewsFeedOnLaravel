@@ -18,7 +18,7 @@ class XmlParserService
 
     public function saveNews($resource)
     {
-        return $this->pushToDb($this->getData($resource->xmlSrc), $resource->id);
+        return $this->pushToDb($this->getData($resource->xmlSrc), $resource);
 
     }
 
@@ -28,34 +28,34 @@ class XmlParserService
         $data = $xml->parse([
             'news' => ['uses' => 'channel.item[guid,title,link,description,pubDate,enclosure::url,category]']
         ]);
-        if (!$data) {
+        if (!$data || !$data['news']) {
             return redirect(route('admin.news.index'))
                 ->with("error", 'Ошибка загрузки данных');
         }
         return $data['news'];
     }
 
-    public function pushToDb($data, $resource_id)
+    public function pushToDb($data, $resource)
     {
         foreach ($data as $items => $item) {
             $newsWithSameTitle = News::where('title', $item['title'])->get()->first();
             if (!$newsWithSameTitle) {
                 $news = new News();
                 $news->fill([
-                    'title' => $item['title'] ,
-                    'text' => $item['description'],
+                    'title' => $item['title'] ?? 'Заголовок отсутсвует',
+                    'text' => $item['description'] ?? ' ',
                     'created_at' => $item['pubDate'],
-                    'category_id' => $this->getCategoryId($item['category']),
+                    'category_id' => $this->getCategoryId($item['category'], $resource['title']),
                     'image' => $item['enclosure::url'],
                     'guid' => $item['guid'],
-                    'resource_id' => $resource_id
+                    'resource_id' => $resource->id
                 ]);
 
-              $result = $news->save();
-              if(!$result){
-                  return redirect(route('admin.news.index'))
-                      ->with("error", 'Ошибка загрузки данных');
-              }
+                $result = $news->save();
+                if (!$result) {
+                    return redirect(route('admin.news.index'))
+                        ->with("error", 'Ошибка загрузки данных');
+                }
 
 
             }
@@ -64,8 +64,9 @@ class XmlParserService
         return true;
     }
 
-    private function getCategoryId($categoryTitle)
+    private function getCategoryId($categoryTitleByNews, $categoryTitleByResource)
     {
+        $categoryTitle = $categoryTitleByNews ?? $categoryTitleByResource;
         $category = Category::firstOrCreate([
             'title' => $categoryTitle ?? 'Другое',
             'slug' => str_replace(' ', '_', $categoryTitle ?? 'Другое')

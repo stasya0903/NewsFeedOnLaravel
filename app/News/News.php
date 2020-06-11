@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
 
 
-
 /**
  * @method static create(array $array)
  */
@@ -57,6 +56,5 @@ class News extends Model
     {
         return (new Carbon(now()))->diffInHours($this->created_at);
     }
-
 
 }

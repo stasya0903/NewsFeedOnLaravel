@@ -94,9 +94,10 @@ class ResourceController extends Controller
     {
         $xml = XmlParser::load($xmlSrc);
         $data = $xml->parse([
-            'title' => ['uses' => 'channel.title'],
+            'title' => ['uses' => 'channel.title'] ?? "Без названия",
             'link' => ['uses' => 'channel.link'],
             'image' => ['uses' => 'channel.image.url'],
+
         ]);
         $data['xmlSrc'] = $xmlSrc;
 
