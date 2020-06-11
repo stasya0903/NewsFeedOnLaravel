@@ -28,40 +28,38 @@ class XmlParserService
         $data = $xml->parse([
             'news' => ['uses' => 'channel.item[guid,title,link,description,pubDate,enclosure::url,category]']
         ]);
-        if (!$data || !$data['news']) {
-            return redirect(route('admin.news.index'))
-                ->with("error", 'Ошибка загрузки данных');
-        }
+
         return $data['news'];
     }
 
     public function pushToDb($data, $resource)
     {
-        foreach ($data as $items => $item) {
-            $newsWithSameTitle = News::where('title', $item['title'])->get()->first();
-            if (!$newsWithSameTitle) {
-                $news = new News();
-                $news->fill([
-                    'title' => $item['title'] ?? 'Заголовок отсутсвует',
-                    'text' => $item['description'] ?? ' ',
-                    'created_at' => $item['pubDate'],
-                    'category_id' => $this->getCategoryId($item['category'], $resource['title']),
-                    'image' => $item['enclosure::url'],
-                    'guid' => $item['guid'],
-                    'resource_id' => $resource->id
-                ]);
+        $result = false;
+        if ($data) {
+            foreach ($data as $items => $item) {
+                $newsWithSameTitle = News::where('title', $item['title'])->get()->first();
+                if (!$newsWithSameTitle) {
+                    $news = new News();
+                    $news->fill([
+                        'title' => $item['title'] ?? 'Заголовок отсутсвует',
+                        'text' => $item['description'] ?? ' ',
+                        'created_at' => $item['pubDate'],
+                        'category_id' => $this->getCategoryId($item['category'], $resource['title']),
+                        'image' => $item['enclosure::url'],
+                        'guid' => $item['guid'],
+                        'resource_id' => $resource->id
+                    ]);
 
-                $result = $news->save();
-                if (!$result) {
-                    return redirect(route('admin.news.index'))
-                        ->with("error", 'Ошибка загрузки данных');
+                    $result = $news->save();
+                    if(!$result){
+                        return $result;
+                    }
                 }
 
-
             }
-
         }
-        return true;
+
+        return $result;
     }
 
     private function getCategoryId($categoryTitleByNews, $categoryTitleByResource)
