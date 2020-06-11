@@ -8892,16 +8892,24 @@ textarea.form-control {
     .blog-entry {
       margin-bottom: 30px; } }
   .blog-entry .text {
-    position: relative;
+      position: relative;
     width: 100%;
     margin: 0 auto; }
-    .blog-entry .text .topper {
-      margin-top: -61px;
+    .blog-entry .for-arrow:after{
+        position: absolute;
+        top: 0;
+        content: '';
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 10px 10px 0 10px;
+        border-color: #ffd369 transparent transparent transparent;
+    }
+    .blog-entry .topper {
       position: absolute;
-      top: 4px;
-      left: 0;
+        bottom:0;
       background: #ffd369; }
-      .blog-entry .text .topper:after {
+.topper:before {
         position: absolute;
         bottom: -10px;
         left: 0;

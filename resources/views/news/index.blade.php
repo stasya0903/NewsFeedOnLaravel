@@ -17,8 +17,6 @@
                         <div class="blog-entry justify-content-end">
                             <a href="{{route('news.show', $item)}}" class="block-20"
                                style="background-image: url({{$item->image ?? asset('image/default.jpg')}})">
-                            </a>
-                            <div class="text p-4 float-right d-block">
                                 <div class="topper d-flex align-items-center">
                                     <div class="py-0 pl-3 pr-1 align-self-stretch">
                                     </div>
@@ -27,6 +25,10 @@
                                             {{$categories[$item->category_id]->title}}</span>
                                     </div>
                                 </div>
+                            </a>
+
+                            <div class="text p-4 float-right d-block for-arrow">
+
                                 <h3 class="heading mb-3">{{$item->title}}</h3>
 
                                 <p>
