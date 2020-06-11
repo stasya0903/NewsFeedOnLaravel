@@ -27,6 +27,7 @@ class NewsController extends Controller
             ->take(3)
             ->get();
         $categoryToOffer = Category::all()->take(6);
+
         return view('news.one', [
             'news' => $news,
             'newsToPromote' => $newsToPromote->except([$news->id]),

@@ -54,9 +54,11 @@ class NewsAgeService
         $start = $this->minimumAge;
         $finish = $this->maximumAge;
 
-        for (; $start < $finish; $start++) {
+        while ($start < $finish) {
+            $start++;
             $currentAgesArray[] = $start;
         }
+
         return $currentAgesArray;
 
 
@@ -67,9 +69,5 @@ class NewsAgeService
         return $newsCreationDate->diffInDays(New Carbon(now()));
     }
 
-    public function getHoursDifference($news)
-    {
-
-    }
 
 }
