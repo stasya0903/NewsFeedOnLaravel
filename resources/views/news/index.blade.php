@@ -16,7 +16,7 @@
                     <div class="col-md-4 d-flex">
                         <div class="blog-entry justify-content-end">
                             <a href="{{route('news.show', $item)}}" class="block-20"
-                               style="background-image: url({{$item->image ?? asset('storage/images/default.jpg')}})">
+                               style="background-image: url({{$item->image ?? asset('images/default.jpg')}})">
                             </a>
                             <div class="text p-4 float-right d-block">
                                 <div class="topper d-flex align-items-center">
