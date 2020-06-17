@@ -54,7 +54,7 @@ class NewsAgeService
         $start = $this->minimumAge;
         $finish = $this->maximumAge;
 
-        while ($start < $finish) {
+        while ($start <= $finish) {
             $start++;
             $currentAgesArray[] = $start;
         }
