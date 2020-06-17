@@ -23,7 +23,7 @@
                         <h2 class="mb-3"><a href="{{$news->guid}}">
                                 {{$news->title}}
                             </a></h2>
-                        <p>{{$news->text}}</p>
+                        <p>{!! $news->text !!}</p>
 
                     </div>
                     <div class="col-lg-4 sidebar pl-lg-5">

@@ -28,6 +28,9 @@
     },
     "dependencies": {
         "@ckeditor/ckeditor5-build-classic": "^18.0.0",
+        "@ckeditor/ckeditor5-build-decoupled-document": "^19.0.2",
+        "@ckeditor/ckeditor5-build-inline": "^19.0.2",
+        "@ckeditor/ckeditor5-vue": "^1.0.1",
         "easy-circular-progress": "^1.0.4",
         "font-awesome": "^4.7.0",
         "vue-radial-progress": "^0.3.1"

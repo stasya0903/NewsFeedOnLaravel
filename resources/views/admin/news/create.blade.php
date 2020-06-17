@@ -11,7 +11,8 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header pink-bg text-white text-center">@if(!$news->id){{ __('Добавить новость') }} @else {{ __('Обновить новость') }} @endif</div>
+                    <div
+                        class="card-header pink-bg text-white text-center">@if(!$news->id){{ __('Добавить новость') }} @else {{ __('Обновить новость') }} @endif</div>
 
                     <div class="card-body">
                         <form enctype="multipart/form-data"
@@ -26,7 +27,7 @@
                                 <div class="col-md-6">
                                     <input id="title" type="text"
                                            class="form-control @error('title') is-invalid @enderror" name="title"
-                                           value="{{  old('title') ?? $news->title}}" >
+                                           value="{{  old('title') ?? $news->title}}">
                                     @error('title')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -44,7 +45,9 @@
                                     <select name="category_id" id="category"
                                             class="form-control @error('category') is-invalid @enderror">
                                         @foreach($categories as $item)
-                                            <option @if ($item->id == old('category_id') || $item->id == $news->category_id) selected @endif value="{{$item->id}}">{{$item->title}}</option>
+                                            <option
+                                                @if ($item->id == old('category_id') || $item->id == $news->category_id) selected
+                                                @endif value="{{$item->id}}">{{$item->title}}</option>
                                         @endforeach
                                     </select>
 
@@ -61,19 +64,26 @@
                                        class="col-md-12 col-form-label text-md-center">{{ __('Текст новости') }}</label>
 
                                 <div class="col-md-12">
-                                    <textarea id="title" type="text"
-                                              class="form-control @error('text') is-invalid @enderror"
-                                              name="text"
-                                              id="summary-ckeditor"
-                                              >{{ old('text') ?? $news->text }}</textarea>
+                                    <text-editor
+                                        user-data="{{ old('text') ?? $news->text ?? 'Новый текст'}}"
+                                    >
+                                    </text-editor>
+
+
+                                 {{--   <textarea
+                                        type="text"
+                                        name="text"
+                                        class="form-control @error('text') is-invalid @enderror"
+                                        id="textEdit"
+
+                                    >{{ old('text') ?? $news->text }}</textarea>
                                     @error('text')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                    @enderror
+                                    @enderror--}}
                                 </div>
                             </div>
-
 
 
                             <div class="form-group row">
@@ -99,13 +109,14 @@
                             <div class="form-group row">
                                 <label for="text"
                                        class="col-md-4 col-form-label text-md-right @error('image') is-invalid @enderror">{{ __('Добавить изображение') }}
-                                    </label>
+                                </label>
                                 <div class="col-md-6">
                                     <div class="form-check">
                                         <div class="form-group">
-                                            <input type="file" name="image" class="@error('image') is-invalid @enderror">
+                                            <input type="file" name="image"
+                                                   class="@error('image') is-invalid @enderror">
                                             @error('image')
-                                            <span class="invalid-feedback" role="alert" >
+                                            <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                             @enderror
@@ -133,7 +144,7 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+    {{--<script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
     <script> var options = {
             filebrowserImageBrowseUrl: '/filemanager?type=Images',
             filebrowserImageUploadUrl: '/filemanager/upload?type=Images&_token={{ csrf_token() }}',
@@ -141,5 +152,5 @@
             filebrowserUploadUrl: '/filemanager/upload?type=Files&_token={{ csrf_token() }}'
         };
         CKEDITOR.replace( 'text', options );
-    </script>
+    </script>--}}
 @endsection
