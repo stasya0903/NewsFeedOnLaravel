@@ -65,23 +65,15 @@
 
                                 <div class="col-md-12">
                                     <text-editor
+                                        class=" @error('text') is-invalid @enderror"
                                         user-data="{{ old('text') ?? $news->text ?? 'Новый текст'}}"
                                     >
                                     </text-editor>
-
-
-                                 {{--   <textarea
-                                        type="text"
-                                        name="text"
-                                        class="form-control @error('text') is-invalid @enderror"
-                                        id="textEdit"
-
-                                    >{{ old('text') ?? $news->text }}</textarea>
                                     @error('text')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="invalid-feedback text-center" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                    @enderror--}}
+                                    @enderror
                                 </div>
                             </div>
 
