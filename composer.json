@@ -26,7 +26,10 @@
         "socialiteproviders/github": "^1.0",
         "socialiteproviders/instagram": "^3.0",
         "socialiteproviders/vkontakte": "^4.0",
-        "unisharp/laravel-filemanager": "^2.0"
+        "unisharp/laravel-filemanager": "^2.0",
+        "unisharp/laravel-ckeditor": "^4.7",
+        "vkcom/vk-php-sdk": "^5.101"
+
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",
